@@ -4,8 +4,7 @@ module.exports = {
     es2021: true,
   },
   extends: [
-    "eslint:recommended",
-    "plugin:react/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
   ],
   parser: "@typescript-eslint/parser",
@@ -17,5 +16,13 @@ module.exports = {
     sourceType: "module",
   },
   plugins: ["react", "@typescript-eslint"],
+  overrides: [
+    {
+      files: ["*.js", "*.jsx"],
+      rules: {
+        "@typescript-eslint/explicit-function-return-type": "off",
+      },
+    },
+  ],
   rules: {},
 };
