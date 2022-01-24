@@ -1,2 +1,9 @@
-# untitled
-다음 프로젝트는 뭘까요
+# Space
+
+- Youtube Data API
+- Firebase
+- Redux
+- TypeScript
+- Scss
+- CRA
+- (Jest)
