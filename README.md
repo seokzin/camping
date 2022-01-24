@@ -8,6 +8,7 @@
 - TypeScript
 - Styled Components
 - Youtube Data API
+- Framer motion
 
 ## Tools
 
@@ -15,4 +16,5 @@
 - Prettier
 - Husky
 - Storybook
-- (Jest)
+- Jest
+- Framer
