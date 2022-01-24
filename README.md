@@ -3,10 +3,16 @@
 ## Stacks
 
 - React + CRA
-- Youtube Data API
 - Firebase
 - Redux
 - TypeScript
-- Scss
+- Styled Components
+- Youtube Data API
+
+## Tools
+
+- ESLint
+- Prettier
+- Husky
+- Storybook
 - (Jest)
-- ESLint + Prettier
