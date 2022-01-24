@@ -21,10 +21,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build & firebase deploy --only hosting",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "deploy": "firebase deploy --only hosting"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
