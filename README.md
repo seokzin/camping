@@ -2,10 +2,11 @@
 
 ## Stacks
 
+- React + CRA
 - Youtube Data API
 - Firebase
 - Redux
 - TypeScript
 - Scss
-- CRA
 - (Jest)
+- ESLint + Prettier
