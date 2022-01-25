@@ -3,12 +3,13 @@
 ## Stacks
 
 - React + CRA
-- Firebase
 - Redux
 - TypeScript
 - Styled Components
+- Firebase
 - Youtube Data API
 - Framer motion
+- Axios
 
 ## Tools
 
