@@ -22,7 +22,7 @@ const TabBar = () => {
 const Layout = styled.div`
   display: flex;
 
-  position: absolute;
+  position: sticky;
   bottom: 0;
 
   width: 100%;

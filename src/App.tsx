@@ -42,13 +42,14 @@ const Layout = styled.div`
 
   border-radius: 1rem;
   background-color: ${({ theme }) => theme.mode.mainColor};
-  overflow: hidden;
+  overflow: scroll;
 `;
 
 const Content = styled.div`
   box-sizing: border-box;
   padding: 1rem;
   border-radius: 1rem;
+  min-height: 100%;
 `;
 
 export default App;
