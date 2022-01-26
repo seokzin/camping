@@ -3,9 +3,13 @@ import React from 'react';
 import { Card, List, Player, SearchBar, Spinner } from './components';
 import Router from './routes';
 
+import { NormalizeStyle, GlobalStyle } from './styles';
+
 const App = () => {
   return (
-    <div>
+    <>
+      <NormalizeStyle />
+      <GlobalStyle />
       <h1>App</h1>
 
       <SearchBar />
@@ -15,7 +19,7 @@ const App = () => {
       <Spinner />
 
       <Router />
-    </div>
+    </>
   );
 };
 
