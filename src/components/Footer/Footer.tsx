@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import TabBarItem from './TabBarItem';
+import FooterItem from './FooterItem';
 
 const data = [
   { icon: '🏠', path: '/' },
@@ -9,11 +9,11 @@ const data = [
   { icon: '🔍', path: '/search' },
 ];
 
-const TabBar = () => {
+const Footer = () => {
   return (
     <Layout>
       {data.map(({ icon, path }) => (
-        <TabBarItem icon={icon} path={path} key={path} />
+        <FooterItem icon={icon} path={path} key={path} />
       ))}
     </Layout>
   );
@@ -32,4 +32,4 @@ const Layout = styled.div`
   z-index: 100;
 `;
 
-export default TabBar;
+export default Footer;

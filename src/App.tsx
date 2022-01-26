@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
-import { TabBar, Toggle } from '@/components';
+import { Footer, Toggle } from '@/components';
 import Router from '@/routes';
 import { Normalize, Global } from '@/styles';
 import { light, dark, fontSize, fontWeight } from '@/styles/theme';
@@ -24,7 +24,7 @@ const App = () => {
           <Router />
         </Content>
 
-        <TabBar />
+        <Footer />
       </Layout>
       <Toggle themeMode={themeMode} toggleTheme={toggleTheme} />
     </ThemeProvider>

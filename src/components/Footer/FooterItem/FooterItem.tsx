@@ -2,12 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-interface ITabBarItem {
+interface IFooterItem {
   icon: string;
   path: string;
 }
 
-const TabBarItem = ({ icon, path }: ITabBarItem) => {
+const FooterItem = ({ icon, path }: IFooterItem) => {
   return (
     <Wrapper>
       <Link to={path}>
@@ -31,4 +31,4 @@ const Layout = styled.div`
   background-color: ${({ theme }) => theme.mode.subColor};
 `;
 
-export default TabBarItem;
+export default FooterItem;
