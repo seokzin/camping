@@ -6,52 +6,31 @@ interface IToggle {
   toggleTheme: () => void;
 }
 
-interface IWrapper {
+interface IButton {
   themeMode: string;
 }
 
 const Toggle = ({ themeMode, toggleTheme }: IToggle) => {
   return (
-    <>
-      <Wrapper onClick={toggleTheme} themeMode={themeMode}>
-        🌞🌛
-      </Wrapper>
-    </>
+    <Button onClick={toggleTheme} themeMode={themeMode}>
+      {themeMode === 'dark' ? '🌞' : '🌙'}
+    </Button>
   );
 };
 
-const Wrapper = styled.button<IWrapper>`
-  background: ${({ theme }) => theme.mode.mainBackground};
-  border: 1px solid ${({ theme }) => theme.mode.border};
-  box-shadow: 0 1px 3px ${({ theme }) => theme.mode.divider};
-  border-radius: 30px;
+const Button = styled.button<IButton>`
+  position: absolute;
+  top: calc(50% - 406px);
+  left: calc(50% + 187.5px);
+  transform: translate(-50%, -50%);
+
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #f7e9ad;
+  border: none;
+  border-radius: 50%;
+
   cursor: pointer;
-  display: flex;
-  font-size: 0.5rem;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 auto;
-  overflow: hidden;
-  padding: 0.5rem;
-  position: fixed;
-  z-index: 1;
-  width: 4rem;
-  height: 2rem;
-  bottom: 2rem;
-  right: 1rem;
-  svg {
-    color: ${({ theme }) => theme.mode.themeIcon};
-    &:first-child {
-      transform: ${({ themeMode }) =>
-        themeMode === 'light' ? 'translateY(0)' : 'translateY(2rem)'};
-      transition: background 0.25s ease 2s;
-    }
-    &:nth-child(2) {
-      transform: ${({ themeMode }) =>
-        themeMode === 'dark' ? 'translateY(0)' : 'translateY(-2rem)'};
-      transition: background 0.25s ease 2s;
-    }
-  }
 `;
 
 export default Toggle;
