@@ -4,15 +4,15 @@ import styled, { ThemeProvider } from 'styled-components';
 import { Footer, Toggle } from '@/components';
 import Router from '@/routes';
 import { Normalize, Global } from '@/styles';
-import { dark, light, fontSizes, fontWeights } from '@/styles/theme';
+import { light, dark, fontSize, fontWeight } from '@/styles/theme';
 import useDarkMode from '@/hooks';
 
 const App = () => {
   const [themeMode, toggleTheme] = useDarkMode();
   const theme =
     themeMode === 'light'
-      ? { mode: light, fontSizes, fontWeights }
-      : { mode: dark, fontSizes, fontWeights };
+      ? { mode: light, fontSize, fontWeight }
+      : { mode: dark, fontSize, fontWeight };
 
   return (
     <ThemeProvider theme={theme}>
@@ -39,7 +39,7 @@ const Layout = styled.div`
   width: 375px;
   height: 812px;
 
-  background-color: ${({ theme }) => theme.mode.mainBackground};
+  background-color: ${({ theme }) => theme.mode.mainColor};
   border-radius: 1rem;
 `;
 
