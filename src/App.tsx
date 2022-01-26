@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Card, List, Player, SearchBar, Spinner } from './components';
+import { Footer } from '@/components';
 import Router from './routes';
-
 import { NormalizeStyle, GlobalStyle } from './styles';
 
 const App = () => {
@@ -11,15 +10,8 @@ const App = () => {
     <Layout>
       <NormalizeStyle />
       <GlobalStyle />
-      <h1>App</h1>
-
-      <SearchBar />
-      <Card />
-      <List />
-      <Player />
-      <Spinner />
-
       <Router />
+      <Footer />
     </Layout>
   );
 };
