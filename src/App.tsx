@@ -1,18 +1,30 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 
-import { Footer } from '@/components';
+import { Footer, Toggle } from '@/components';
 import Router from '@/routes';
-import { NormalizeStyle, GlobalStyle } from '@/styles';
+import { Normalize, Global } from '@/styles';
+import { dark, light, fontSizes, fontWeights } from '@/styles/theme';
+import useDarkMode from '@/hooks';
 
 const App = () => {
+  const [themeMode, toggleTheme] = useDarkMode();
+  const theme =
+    themeMode === 'light'
+      ? { mode: light, fontSizes, fontWeights }
+      : { mode: dark, fontSizes, fontWeights };
+
   return (
-    <Layout>
-      <NormalizeStyle />
-      <GlobalStyle />
-      <Router />
-      <Footer />
-    </Layout>
+    <ThemeProvider theme={theme}>
+      <Layout>
+        <Normalize />
+        <Global />
+
+        <Toggle themeMode={themeMode} toggleTheme={toggleTheme} />
+        <Router />
+        <Footer />
+      </Layout>
+    </ThemeProvider>
   );
 };
 
@@ -27,7 +39,7 @@ const Layout = styled.div`
   width: 375px;
   height: 812px;
 
-  background-color: white;
+  background-color: ${({ theme }) => theme.mode.mainBackground};
   border-radius: 1rem;
 `;
 
