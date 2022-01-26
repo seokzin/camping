@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
-import youtube from '../../services/youtube';
+import youtube from '@/services/youtube';
+import { dataSearch, dataVideo, dataPlaylists } from '@/assets/data';
 
 const SearchBar = () => {
   const [term, setTerm] = useState('');
@@ -8,13 +9,14 @@ const SearchBar = () => {
   const onInputChange = async (e: any) => {
     setTerm(e.target.value);
 
-    const response = await youtube.get('/search', {
-      params: {
-        q: term,
-      },
-    });
+    // const response = await youtube.get('/search', {
+    //   params: {
+    //     q: term,
+    //   },
+    // });
 
-    console.log(response.data.items[0].snippet.title);
+    console.log(dataSearch);
+    console.log(dataVideo);
   };
 
   return (
