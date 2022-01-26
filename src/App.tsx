@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Card, List, Player, SearchBar, Spinner } from './components';
+import Router from './routes';
 
 const App = () => {
   return (
@@ -12,6 +13,8 @@ const App = () => {
       <List />
       <Player />
       <Spinner />
+
+      <Router />
     </div>
   );
 };
