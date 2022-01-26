@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { Home, Search, PlayList } from '../pages';
+import { Home, Search, PlayList } from '@/pages';
 
 const Router = () => {
   return (

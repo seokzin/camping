@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 
-import App from './App';
-import { app } from './firebase';
+import App from '@/App';
+import { app } from '@/firebase';
 
 console.log(app);
 

@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { Footer } from '@/components';
-import Router from './routes';
-import { NormalizeStyle, GlobalStyle } from './styles';
+import Router from '@/routes';
+import { NormalizeStyle, GlobalStyle } from '@/styles';
 
 const App = () => {
   return (
