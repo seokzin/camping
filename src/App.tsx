@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
-import { Footer, Toggle } from '@/components';
+import { Header, Footer, Toggle } from '@/components';
 import Router from '@/routes';
 import { Normalize, Global } from '@/styles';
 import { light, dark, fontSize, fontWeight } from '@/styles/theme';
@@ -20,6 +20,8 @@ const App = () => {
       <Global />
 
       <Layout>
+        <Header />
+
         <Content>
           <Router />
         </Content>
