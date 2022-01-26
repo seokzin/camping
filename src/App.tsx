@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
-import { Footer, Toggle } from '@/components';
+import { TabBar, Toggle } from '@/components';
 import Router from '@/routes';
 import { Normalize, Global } from '@/styles';
 import { light, dark, fontSize, fontWeight } from '@/styles/theme';
@@ -16,30 +16,38 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Layout>
-        <Normalize />
-        <Global />
+      <Normalize />
+      <Global />
 
-        <Toggle themeMode={themeMode} toggleTheme={toggleTheme} />
-        <Router />
-        <Footer />
+      <Layout>
+        <Content>
+          <Router />
+        </Content>
+
+        <TabBar />
       </Layout>
+      <Toggle themeMode={themeMode} toggleTheme={toggleTheme} />
     </ThemeProvider>
   );
 };
 
 const Layout = styled.div`
-  box-sizing: border-box;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 
-  padding: 1rem;
   width: 375px;
   height: 812px;
 
+  border-radius: 1rem;
   background-color: ${({ theme }) => theme.mode.mainColor};
+  overflow: hidden;
+`;
+
+const Content = styled.div`
+  box-sizing: border-box;
+  padding: 1rem;
   border-radius: 1rem;
 `;
 
