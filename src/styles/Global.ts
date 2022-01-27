@@ -20,8 +20,10 @@ const Global = createGlobalStyle`
   h3,
   h4,
   h5,
-  h6 {
+  h6,
+  p {
     color: ${({ theme }) => theme.mode.title};
+    margin: 0;
   }
 `;
 
