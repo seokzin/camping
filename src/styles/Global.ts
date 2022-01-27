@@ -11,7 +11,6 @@ const Global = createGlobalStyle`
   }
 
   div {
-    background-color: ${({ theme }) => theme.mode.mainColor};
     color: ${({ theme }) => theme.mode.mainText};
   }
 

@@ -15,8 +15,8 @@ const dark = {
 };
 
 const fontSize = {
-  xs: '10px',
-  sm: '12px',
+  xs: '12px',
+  sm: '14px',
   md: '16px',
   lg: '20px',
   xl: '24px',
