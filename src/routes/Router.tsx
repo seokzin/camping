@@ -6,11 +6,9 @@ import { Home, Search, PlayList } from '@/pages';
 const Router = () => {
   return (
     <Routes>
-      <Route>
-        <Route path='/' element={<Home />} />
-        <Route path='search' element={<Search />} />
-        <Route path='playlist' element={<PlayList />} />
-      </Route>
+      <Route path='/' element={<Home />} />
+      <Route path='search' element={<Search />} />
+      <Route path='playlist' element={<PlayList />} />
     </Routes>
   );
 };
