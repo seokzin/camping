@@ -11,14 +11,23 @@ const Card = (data: any) => {
   return (
     <Layout>
       <Image src={movie.thumbnail} />
-      <p>{movie.videoId}</p>
-      <p>{movie.title}</p>
+      {/* <p>{movie.videoId}</p> */}
+      <Title>{movie.title}</Title>
     </Layout>
   );
 };
 
 const Layout = styled.div``;
 
-const Image = styled.img``;
+const Title = styled.h2`
+  font-size: ${({ theme }) => theme.fontSize.md};
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: 12rem;
+  object-fit: cover;
+  border-radius: 0.5rem;
+`;
 
 export default Card;
