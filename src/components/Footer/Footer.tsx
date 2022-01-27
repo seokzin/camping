@@ -26,9 +26,10 @@ const Layout = styled.div`
   bottom: 0;
 
   width: 100%;
-  height: 4rem;
+  height: 3rem;
 
   /* background-color: ${({ theme }) => theme.mode.mainColor}; */
+  background-color: #000000aa;
   z-index: 100;
 `;
 
