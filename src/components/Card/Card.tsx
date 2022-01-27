@@ -19,15 +19,17 @@ const Card = (data: any) => {
 
 const Layout = styled.div``;
 
-const Title = styled.h2`
+const Title = styled.h1`
   font-size: ${({ theme }) => theme.fontSize.md};
+
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 `;
 
 const Image = styled.img`
   width: 100%;
-  height: 12rem;
-  object-fit: cover;
-  border-radius: 0.5rem;
 `;
 
 export default Card;
