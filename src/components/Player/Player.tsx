@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { dataVideo, dataVideoDetail } from '@/assets/data';
+import getDuration from '@/utils/getDuration';
 
 const data = dataVideo.items[0].snippet;
 const duration = dataVideoDetail.items[0].contentDetails.duration;
@@ -13,6 +14,10 @@ const Player = () => {
     duration,
   };
 
+  const durat = getDuration(video.duration);
+
+  console.log('asdfsdaf', durat);
+
   return (
     <Layout>
       <Image src={video.thumbnail} />
@@ -20,7 +25,7 @@ const Player = () => {
       <div>
         <Title>{video.title}</Title>
         <ChannelTitle>{video.channel}</ChannelTitle>
-        <p>{video.duration}</p>
+        {/* <Duration>{durat}</Duration> */}
       </div>
     </Layout>
   );
@@ -66,5 +71,7 @@ const Image = styled.img`
   border-radius: 0.25rem;
   margin-right: 0.5rem;
 `;
+
+const Duration = styled.p``;
 
 export default Player;
