@@ -1,13 +1,13 @@
 import React from 'react';
+import styled from 'styled-components';
 
-import { SearchBar } from '@/components';
-import { ReactComponent as SearchIcon } from '@/assets/icons/search.svg';
+import { SearchBar, SearchResult } from '@/components';
 
 const Search = () => {
   return (
     <>
       <SearchBar />
-      <SearchIcon fill='blue' />
+      <SearchResult />
     </>
   );
 };
