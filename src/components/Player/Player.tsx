@@ -1,8 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
+import { dataVideo, dataVideoDetail } from '@/assets/data';
+
+const data = dataVideo.items[0].snippet;
+const duration = dataVideoDetail.items[0].contentDetails.duration;
 
 const Player = () => {
-  return <Layout>제목 재생 정지 일시정지</Layout>;
+  const video = {
+    title: data.title,
+    channel: data.channelId,
+    thumbnail: data.thumbnails.default.url,
+    duration,
+  };
+
+  return (
+    <Layout>
+      <p>{video.title}</p>
+      <p>{video.channel}</p>
+      <p>{video.thumbnail}</p>
+      <p>{video.duration}</p>
+    </Layout>
+  );
 };
 
 const Layout = styled.div`
