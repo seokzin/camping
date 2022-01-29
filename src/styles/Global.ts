@@ -10,7 +10,7 @@ const Global = createGlobalStyle`
   background-color: #6868AB;
   }
 
-  div {
+  * {
     color: ${({ theme }) => theme.mode.mainText};
   }
 
