@@ -25,26 +25,33 @@ const SearchBar = () => {
   return (
     <Layout>
       <SearchInput />
-      <SearchIcon />
+      <SearchIcon width={26} height={26} />
     </Layout>
   );
 };
 
 const Layout = styled.div`
   display: flex;
-  gap: 1rem;
-  width: 100%;
+  align-items: center;
+  gap: 0.5rem;
 
-  padding-bottom: 0.5rem;
+  width: 100%;
+  margin-bottom: 1rem;
+
   border-bottom: 1px solid gray;
 `;
 
 const SearchInput = styled.input`
-  border: none;
-
-  background-color: transparent;
-
   width: 100%;
+  height: 2rem;
+  border: none;
+  background-color: transparent;
+  font-size: ${({ theme }) => theme.fontSize.lg};
+  font-weight: ${({ theme }) => theme.fontWeight.bold};
+
+  :focus {
+    outline: none;
+  }
 `;
 
 export default SearchBar;
