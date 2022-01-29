@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { dataVideo, dataVideoDetail } from '@/assets/data';
+import { PlayIcon, PauseIcon, SkipBackIcon, SkipForwardIcon } from '@/assets/icons';
+
 import getDuration from '@/utils/getDuration';
 
 const data = dataVideo.items[0].snippet;
@@ -22,11 +24,18 @@ const Player = () => {
     <Layout>
       <Image src={video.thumbnail} />
 
-      <div>
+      <InfoBox>
         <Title>{video.title}</Title>
         <ChannelTitle>{video.channel}</ChannelTitle>
         {/* <Duration>{durat}</Duration> */}
-      </div>
+      </InfoBox>
+
+      <ControllerBox>
+        <SkipBackIcon width={20} height={20} />
+        <PlayIcon />
+        {/* <PauseIcon /> */}
+        <SkipForwardIcon width={20} height={20} />
+      </ControllerBox>
     </Layout>
   );
 };
@@ -36,7 +45,7 @@ const Layout = styled.div`
   padding: 0 1rem;
 
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 
   position: sticky;
@@ -45,14 +54,24 @@ const Layout = styled.div`
   width: 100%;
   height: 4rem;
 
-  /* background-color: ${({ theme }) => theme.mode.mainColor}; */
-  background-color: ${({ theme }) => theme.mode.subColor};
+  background-color: ${({ theme }) => theme.mode.mainColor};
+  border-top: 2px solid ${({ theme }) => theme.mode.subColor};
   z-index: 100;
+
+  svg path {
+    fill: ${({ theme }) => theme.mode.mainText};
+  }
+`;
+
+const InfoBox = styled.div`
+  width: 12rem;
+  margin-right: 1rem;
 `;
 
 const Title = styled.h1`
-  font-size: ${({ theme }) => theme.fontSize.md};
+  font-size: ${({ theme }) => theme.fontSize.sm};
   color: ${({ theme }) => theme.mode.mainText};
+  margin-bottom: 0.5rem;
 
   overflow: hidden;
   display: -webkit-box;
@@ -63,7 +82,7 @@ const Title = styled.h1`
 const ChannelTitle = styled.h3`
   margin-top: 0.2rem;
 
-  font-size: ${({ theme }) => theme.fontSize.sm};
+  font-size: ${({ theme }) => theme.fontSize.xs};
   color: ${({ theme }) => theme.mode.subText};
 `;
 
@@ -74,5 +93,11 @@ const Image = styled.img`
 `;
 
 const Duration = styled.p``;
+
+const ControllerBox = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+`;
 
 export default Player;
