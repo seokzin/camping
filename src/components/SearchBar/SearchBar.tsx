@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import youtube from '@/services/youtube';
 import { dataSearch, dataVideo, dataPlaylists } from '@/assets/data';
 
-import { ReactComponent as search } from '@/assets/icons/search.svg';
+import { SearchIcon } from '@/assets/icons';
 import styled from 'styled-components';
 
 const SearchBar = () => {
@@ -32,11 +32,5 @@ const SearchBar = () => {
 };
 
 const SearchInput = styled.input``;
-
-const SearchIcon = styled(search)`
-  path {
-    stroke: red;
-  }
-`;
 
 export default SearchBar;
