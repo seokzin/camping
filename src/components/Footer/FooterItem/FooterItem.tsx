@@ -8,16 +8,10 @@ interface IFooterItem {
 }
 
 const FooterItem = ({ path, component }: IFooterItem) => {
-  return (
-    <Layout>
-      <Link to={path}>
-        <Layout>{component}</Layout>
-      </Link>
-    </Layout>
-  );
+  return <StyledLink to={path}>{component}</StyledLink>;
 };
 
-const Layout = styled.div`
+const StyledLink = styled(Link)`
   width: 100%;
   height: 100%;
 

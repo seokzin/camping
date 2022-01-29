@@ -23,14 +23,28 @@ const SearchBar = () => {
   };
 
   return (
-    <div>
-      {/* <input type='text' onChange={onInputChange} value={term} /> */}
+    <Layout>
       <SearchInput />
       <SearchIcon />
-    </div>
+    </Layout>
   );
 };
 
-const SearchInput = styled.input``;
+const Layout = styled.div`
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid gray;
+`;
+
+const SearchInput = styled.input`
+  border: none;
+
+  background-color: transparent;
+
+  width: 100%;
+`;
 
 export default SearchBar;
