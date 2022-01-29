@@ -1,1 +1,1 @@
-export { default as getDuration } from './getDuration';
+export { default as getPlayTime } from './getPlayTime';
