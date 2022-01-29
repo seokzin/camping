@@ -46,6 +46,10 @@ const Layout = styled.div`
   border-radius: 1rem;
   background-color: ${({ theme }) => theme.mode.mainColor};
   overflow: scroll;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const Content = styled.div`
