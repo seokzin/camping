@@ -20,7 +20,7 @@ const App = () => {
       <Global />
 
       <Layout>
-        {/* <Header /> */}
+        <Header />
 
         <Content>
           <Router />
