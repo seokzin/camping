@@ -24,6 +24,12 @@ const Global = createGlobalStyle`
     color: ${({ theme }) => theme.mode.title};
     margin: 0;
   }
+
+  svg  {
+    path {
+      stroke: ${({ theme }) => theme.mode.mainText};
+    }
+  }
 `;
 
 export default Global;
