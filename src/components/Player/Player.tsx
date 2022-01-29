@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { dataVideo, dataVideoDetail } from '@/assets/data';
 import { PlayIcon, PauseIcon, SkipBackIcon, SkipForwardIcon } from '@/assets/icons';
 
-import getDuration from '@/utils/getDuration';
+import { getDuration } from '@/utils';
 
 const data = dataVideo.items[0].snippet;
 const duration = dataVideoDetail.items[0].contentDetails.duration;
@@ -16,10 +16,6 @@ const Player = () => {
     duration,
   };
 
-  const durat = getDuration(video.duration);
-
-  console.log('asdfsdaf', durat);
-
   return (
     <Layout>
       <Image src={video.thumbnail} />
@@ -27,7 +23,7 @@ const Player = () => {
       <InfoBox>
         <Title>{video.title}</Title>
         <ChannelTitle>{video.channel}</ChannelTitle>
-        {/* <Duration>{durat}</Duration> */}
+        <Duration>{getDuration(duration)}</Duration>
       </InfoBox>
 
       <ControllerBox>

@@ -1,5 +1,5 @@
 const getDuration = (value: string) => {
-  console.log(value.slice(2));
+  return value.replace('PT', '').replace('H', ':').replace('M', ':').replace('S', '');
 };
 
 export default getDuration;
