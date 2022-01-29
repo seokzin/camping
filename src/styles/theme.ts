@@ -1,6 +1,6 @@
 const light = {
   mainColor: '#FFFFFF',
-  subColor: '#868E96',
+  subColor: '#DEE2E6',
   title: '#292D32',
   mainText: '#3D4248',
   subText: '#868E96',

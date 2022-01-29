@@ -52,7 +52,7 @@ const Layout = styled.div`
   height: 4rem;
 
   background-color: ${({ theme }) => theme.mode.mainColor};
-  border-top: 2px solid ${({ theme }) => theme.mode.subColor};
+  border-top: 1px solid ${({ theme }) => theme.mode.subColor};
   z-index: 100;
 
   svg path {
@@ -94,7 +94,7 @@ const Duration = styled.p``;
 const ControllerBox = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.2rem;
+  gap: 0.5rem;
 `;
 
 export default Player;

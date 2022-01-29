@@ -30,7 +30,7 @@ const Layout = styled.div`
   height: 3rem;
 
   background-color: ${({ theme }) => theme.mode.mainColor};
-  border-top: 2px solid ${({ theme }) => theme.mode.subColor};
+  border-top: 1px solid ${({ theme }) => theme.mode.subColor};
   z-index: 100;
 `;
 
