@@ -26,9 +26,11 @@ const Button = styled.button<IButton>`
 
   width: 2.5rem;
   height: 2.5rem;
-  background-color: #f7e9ad;
+  background-color: ${({ theme }) => theme.mode.mainColor};
   border: none;
   border-radius: 50%;
+
+  box-shadow: 0px 1px 4px #00000099;
 
   cursor: pointer;
 `;
