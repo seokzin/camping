@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import { SearchBar, SearchResult } from '@/components';
 
+// TODO: isLoading, isData
 const Search = () => {
   return (
     <>
