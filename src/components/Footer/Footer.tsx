@@ -29,8 +29,8 @@ const Layout = styled.div`
   width: 100%;
   height: 3rem;
 
-  /* background-color: ${({ theme }) => theme.mode.mainColor}; */
-  background-color: #000000aa;
+  background-color: ${({ theme }) => theme.mode.mainColor};
+  border-top: 2px solid ${({ theme }) => theme.mode.subColor};
   z-index: 100;
 `;
 

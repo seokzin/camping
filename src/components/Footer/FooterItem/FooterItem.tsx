@@ -18,7 +18,6 @@ const StyledLink = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${({ theme }) => theme.mode.subColor};
 `;
 
 export default FooterItem;
