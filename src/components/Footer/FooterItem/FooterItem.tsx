@@ -3,23 +3,19 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 interface IFooterItem {
-  icon: string;
   path: string;
+  component: JSX.Element;
 }
 
-const FooterItem = ({ icon, path }: IFooterItem) => {
+const FooterItem = ({ path, component }: IFooterItem) => {
   return (
-    <Wrapper>
+    <Layout>
       <Link to={path}>
-        <Layout>{icon}</Layout>
+        <Layout>{component}</Layout>
       </Link>
-    </Wrapper>
+    </Layout>
   );
 };
-
-const Wrapper = styled.div`
-  width: 100%;
-`;
 
 const Layout = styled.div`
   width: 100%;
