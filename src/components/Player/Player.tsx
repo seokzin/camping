@@ -32,6 +32,7 @@ const Player = () => {
 };
 
 const Layout = styled.div`
+  box-sizing: border-box;
   padding: 0 1rem;
 
   display: flex;
