@@ -16,7 +16,6 @@ const Player = () => {
     duration,
   };
 
-  console.log(duration);
   return (
     <Layout>
       <Image src={video.thumbnail} />
