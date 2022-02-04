@@ -4,7 +4,7 @@ const initialState = {
   videos: [],
 };
 
-const videoSlice = createSlice({
+export const videoSlice = createSlice({
   name: 'videos',
   initialState,
   reducers: {
