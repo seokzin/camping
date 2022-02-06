@@ -3,9 +3,6 @@ import styled from 'styled-components';
 
 import youtube from '@/services/youtube';
 import { Card } from '@/components/';
-import { dataSearch } from '@/assets/data';
-
-const items = dataSearch.items;
 
 const Home = () => {
   const [data, setData] = useState<any[]>([]);
