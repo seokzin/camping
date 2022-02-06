@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import youtube from '@/services/youtube';
-import { Card } from '@/components/';
+import { Card, Spinner } from '@/components/';
 
 const Home = () => {
   const [data, setData] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
     const response = await youtube.get('/videos', {
@@ -19,20 +20,18 @@ const Home = () => {
       },
     });
     setData(response.data.items);
+    setLoading(false);
   };
 
   useEffect(() => {
     fetchData();
-    console.log(data);
   }, []);
 
   return (
     <>
       <Title>인기 동영상</Title>
 
-      {data?.map((item, index) => (
-        <Card data={item} key={index} />
-      ))}
+      {loading ? <Spinner /> : data?.map((item, index) => <Card data={item} key={index} />)}
     </>
   );
 };
@@ -40,6 +39,7 @@ const Home = () => {
 const Title = styled.h1`
   display: flex;
   font-size: ${({ theme }) => theme.fontSize.xl};
+  margin-bottom: 1rem;
 `;
 
 export default Home;
