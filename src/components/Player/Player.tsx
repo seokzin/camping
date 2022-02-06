@@ -23,7 +23,9 @@ const Player = () => {
       <InfoBox>
         <Title>{video.title}</Title>
         <ChannelTitle>{video.channel}</ChannelTitle>
-        <Duration>{getTimeStamp(getPlayTime(duration))}</Duration>
+        <Duration>
+          {getTimeStamp(324)} / {getTimeStamp(getPlayTime(duration))}
+        </Duration>
       </InfoBox>
 
       <ControllerBox>
@@ -67,7 +69,7 @@ const InfoBox = styled.div`
 const Title = styled.h1`
   font-size: ${({ theme }) => theme.fontSize.sm};
   color: ${({ theme }) => theme.mode.mainText};
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.2rem;
 
   overflow: hidden;
   display: -webkit-box;
@@ -76,8 +78,6 @@ const Title = styled.h1`
 `;
 
 const ChannelTitle = styled.h3`
-  margin-top: 0.2rem;
-
   font-size: ${({ theme }) => theme.fontSize.xs};
   color: ${({ theme }) => theme.mode.subText};
 `;
@@ -88,7 +88,11 @@ const Image = styled.img`
   margin-right: 0.5rem;
 `;
 
-const Duration = styled.p``;
+const Duration = styled.p`
+  margin-top: 0.3rem;
+  font-size: ${({ theme }) => theme.fontSize.xs};
+  color: ${({ theme }) => theme.mode.subText};
+`;
 
 const ControllerBox = styled.div`
   display: flex;
