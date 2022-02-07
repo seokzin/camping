@@ -1,7 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
+import videoReducer from './videoSlice';
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    videos: videoReducer,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
