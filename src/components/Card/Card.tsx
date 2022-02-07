@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { getPlayTime, getTimeStamp } from '@/utils';
 
 const Card = (data: any) => {
   const movie = {
@@ -7,11 +8,15 @@ const Card = (data: any) => {
     title: data.data.snippet.title,
     channelTitle: data.data.snippet.channelTitle,
     thumbnail: data.data.snippet.thumbnails.medium.url,
+    duration: data.data.contentDetails.duration,
   };
 
   return (
     <Layout>
-      <Image src={movie.thumbnail} />
+      <ImageBox>
+        <Image src={movie.thumbnail}></Image>
+        <Duration>{getTimeStamp(getPlayTime(movie?.duration))}</Duration>
+      </ImageBox>
       <Title>{movie.title}</Title>
       <ChannelTitle>{movie.channelTitle}</ChannelTitle>
     </Layout>
@@ -26,6 +31,28 @@ const Layout = styled.div`
   :hover {
     opacity: 0.8;
   }
+`;
+
+const ImageBox = styled.div`
+  position: relative;
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: 12rem;
+  border-radius: 0.5rem;
+`;
+
+const Duration = styled.p`
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.2rem;
+  background-color: #00000077;
+  color: #ffffff;
+  overflow: hidden;
+  padding: 0.3rem;
+  border-radius: 0.3rem;
+  font-size: ${({ theme }) => theme.fontSize.xs};
 `;
 
 const Title = styled.h2`
@@ -45,12 +72,6 @@ const ChannelTitle = styled.h3`
 
   font-size: ${({ theme }) => theme.fontSize.sm};
   color: ${({ theme }) => theme.mode.subText};
-`;
-
-const Image = styled.img`
-  width: 100%;
-  height: 12rem;
-  border-radius: 0.5rem;
 `;
 
 export default Card;
