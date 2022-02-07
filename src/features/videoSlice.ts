@@ -1,18 +1,22 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const initialState = {
-  videos: [],
+interface VideoState {
+  value: string[];
+}
+
+const initialState: VideoState = {
+  value: [],
 };
 
 export const videoSlice = createSlice({
   name: 'videos',
   initialState,
   reducers: {
-    addVideos: (state, { payload }) => {
-      state.videos = payload;
+    addVideo: (state, action: PayloadAction<string>) => {
+      state.value.push(action.payload);
     },
   },
 });
 
-export const { addVideos } = videoSlice.actions;
+export const { addVideo } = videoSlice.actions;
 export default videoSlice.reducer;
