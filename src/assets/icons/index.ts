@@ -9,3 +9,4 @@ export { ReactComponent as PlayIcon } from './play.svg';
 export { ReactComponent as RewindIcon } from './rewind.svg';
 export { ReactComponent as SkipBackIcon } from './skip-back.svg';
 export { ReactComponent as SkipForwardIcon } from './skip-forward.svg';
+export { ReactComponent as BookmarkIcon } from './bookmark.svg';
