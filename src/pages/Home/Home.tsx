@@ -11,7 +11,7 @@ const Home = () => {
   const fetchData = async () => {
     const response = await youtube.get('/videos', {
       params: {
-        part: 'snippet',
+        part: 'snippet,contentDetails',
         // q: term,
         chart: 'mostPopular',
         maxResults: 10,
@@ -21,6 +21,7 @@ const Home = () => {
     });
     setData(response.data.items);
     setLoading(false);
+    console.log(data);
   };
 
   useEffect(() => {
