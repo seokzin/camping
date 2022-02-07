@@ -8,14 +8,14 @@ const Card = (data: any) => {
     title: data.data.snippet.title,
     channelTitle: data.data.snippet.channelTitle,
     thumbnail: data.data.snippet.thumbnails.medium.url,
-    duration: data.data.contentDetails.duration,
+    duration: data.data.contentDetails?.duration ?? '',
   };
 
   return (
     <Layout>
       <ImageBox>
         <Image src={movie.thumbnail}></Image>
-        <Duration>{getTimeStamp(getPlayTime(movie?.duration))}</Duration>
+        {movie.duration && <Duration>{getTimeStamp(getPlayTime(movie.duration))}</Duration>}
       </ImageBox>
       <Title>{movie.title}</Title>
       <ChannelTitle>{movie.channelTitle}</ChannelTitle>
