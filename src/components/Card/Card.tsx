@@ -1,23 +1,32 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+
+import { addVideo } from '@/features/videoSlice';
 import { getPlayTime, getTimeStamp } from '@/utils';
 import { BookmarkIcon } from '@/assets/icons';
 
 const Card = (data: any) => {
   const movie = {
-    videoId: data.data.id.videoId,
+    videoId: data.data.id,
     title: data.data.snippet.title,
     channelTitle: data.data.snippet.channelTitle,
     thumbnail: data.data.snippet.thumbnails.medium.url,
     duration: data.data.contentDetails?.duration ?? '',
   };
 
+  const dispatch = useDispatch();
+
+  const handleAddVideo = () => {
+    dispatch(addVideo(movie.videoId));
+  };
+
   return (
     <Layout>
       <ImageBox>
-        <Bookmark>
+        <BookmarkButton onClick={handleAddVideo}>
           <BookmarkIcon />
-        </Bookmark>
+        </BookmarkButton>
         <Image src={movie.thumbnail}></Image>
         {movie.duration && <Duration>{getTimeStamp(getPlayTime(movie.duration))}</Duration>}
       </ImageBox>
@@ -47,10 +56,12 @@ const Image = styled.img`
   border-radius: 0.5rem;
 `;
 
-const Bookmark = styled.div`
+const BookmarkButton = styled.button`
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
+  background-color: transparent;
+  border: none;
 
   svg {
     fill: ${({ theme }) => theme.mode.mainText};
