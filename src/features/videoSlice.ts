@@ -15,11 +15,16 @@ export const videoSlice = createSlice({
   initialState,
   reducers: {
     addVideo: (state, action: PayloadAction<string>) => {
-      console.log(action.payload);
+      console.log('add');
       state.videos.push(action.payload);
+    },
+    removeVideo: (state, action: PayloadAction<string>) => {
+      console.log('remove');
+      state.videos.filter((item) => item !== action.payload);
+      // state.videos.splice(state.videos.findIndex((item) => item === action.payload), 1);
     },
   },
 });
 
-export const { addVideo } = videoSlice.actions;
+export const { addVideo, removeVideo } = videoSlice.actions;
 export default videoSlice.reducer;
