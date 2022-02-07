@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { getPlayTime, getTimeStamp } from '@/utils';
+import { BookmarkIcon } from '@/assets/icons';
 
 const Card = (data: any) => {
   const movie = {
@@ -14,6 +15,9 @@ const Card = (data: any) => {
   return (
     <Layout>
       <ImageBox>
+        <Bookmark>
+          <BookmarkIcon />
+        </Bookmark>
         <Image src={movie.thumbnail}></Image>
         {movie.duration && <Duration>{getTimeStamp(getPlayTime(movie.duration))}</Duration>}
       </ImageBox>
@@ -41,6 +45,16 @@ const Image = styled.img`
   width: 100%;
   height: 12rem;
   border-radius: 0.5rem;
+`;
+
+const Bookmark = styled.div`
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+
+  svg {
+    fill: ${({ theme }) => theme.mode.mainText};
+  }
 `;
 
 const Duration = styled.p`
