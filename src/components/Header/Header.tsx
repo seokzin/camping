@@ -2,11 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Header = () => {
-  return (
-    <Layout>
-      <Title>Header</Title>
-    </Layout>
-  );
+  return <Layout></Layout>;
 };
 
 const Layout = styled.div`
@@ -18,7 +14,7 @@ const Layout = styled.div`
   padding: 0 1rem;
 
   width: 100%;
-  height: 3rem;
+  height: 1.5rem;
 
   background-color: ${({ theme }) => theme.mode.subColor};
   z-index: 100;
