@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 
-import { addVideo } from '@/features/videoSlice';
+import { addVideo, removeVideo } from '@/features/videoSlice';
 import { getPlayTime, getTimeStamp } from '@/utils';
 import { BookmarkIcon } from '@/assets/icons';
 
 const Card = (data: any) => {
+  const [isAdded, setIsAdded] = useState(false);
+
   const movie = {
     videoId: data.data.id,
     title: data.data.snippet.title,
@@ -18,7 +20,14 @@ const Card = (data: any) => {
   const dispatch = useDispatch();
 
   const handleAddVideo = () => {
-    dispatch(addVideo(movie.videoId));
+    if (!isAdded) {
+      dispatch(addVideo(movie.videoId));
+      setIsAdded(true);
+    }
+    if (isAdded) {
+      dispatch(removeVideo(movie.videoId));
+      setIsAdded(false);
+    }
   };
 
   return (
