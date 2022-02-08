@@ -14,19 +14,29 @@ const Search = () => {
   };
 
   // TODO : useEffect?
-  const onSubmit = async (e: any) => {
+  const onSubmit = (e: any) => {
     if (term && (e.type === 'click' || e.key === 'Enter')) {
-      const response = await youtube.get('/search', {
-        params: {
-          part: 'snippet',
-          q: term,
-          maxResults: 10,
-          regionCode: 'KR',
-          // videoCategoryId: '10', // FIX ME: Not working
-        },
-      });
-      setData(response.data.items);
-      console.log(data);
+      youtube
+        .get('/search', {
+          params: {
+            part: 'snippet',
+            q: term,
+            maxResults: 10,
+            regionCode: 'KR',
+            // videoCategoryId: '10', // FIX ME: Not working
+          },
+        })
+        .then((res) =>
+          res.data.items.map((item: any) =>
+            youtube.get('/videos', {
+              params: {
+                part: 'snippet, contentDetails',
+                id: item.id.videoId,
+              },
+            }),
+          ),
+        )
+        .then((res) => setData(res.data.items));
     }
   };
 
