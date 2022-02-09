@@ -13,30 +13,39 @@ const Search = () => {
     setTerm(e.target.value);
   };
 
-  // TODO : useEffect?
-  const onSubmit = (e: any) => {
+  const getSearchInfo = async () => {
+    const response = await youtube.get('/search', {
+      params: {
+        part: 'snippet',
+        q: term,
+        maxResults: 10,
+        regionCode: 'KR',
+      },
+    });
+    return response.data.items;
+  };
+
+  const getVideosInfo = async (id: string) => {
+    const response = await youtube.get('/videos', {
+      params: {
+        part: 'snippet, contentDetails',
+        id,
+      },
+    });
+
+    return response.data.items[0];
+  };
+
+  const onSubmit = async (e: any) => {
     if (term && (e.type === 'click' || e.key === 'Enter')) {
-      youtube
-        .get('/search', {
-          params: {
-            part: 'snippet',
-            q: term,
-            maxResults: 10,
-            regionCode: 'KR',
-            // videoCategoryId: '10', // FIX ME: Not working
-          },
-        })
-        .then((res) =>
-          res.data.items.map((item: any) =>
-            youtube.get('/videos', {
-              params: {
-                part: 'snippet, contentDetails',
-                id: item.id.videoId,
-              },
-            }),
-          ),
-        )
-        .then((res) => setData(res.data.items));
+      // const searchData = await getSearchInfo().then((res) => setData(res.data.items));
+      const searchData = await getSearchInfo();
+
+      const videosData = await Promise.all(
+        searchData.map((item: any) => getVideosInfo(item.id.videoId)),
+      );
+
+      setData(videosData);
     }
   };
 
