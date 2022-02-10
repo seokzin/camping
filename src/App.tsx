@@ -56,7 +56,7 @@ const Content = styled.div`
   box-sizing: border-box;
   padding: 1rem;
   border-radius: 1rem;
-  min-height: 100%;
+  height: calc(812px - 8.5rem);
 `;
 
 export default App;
