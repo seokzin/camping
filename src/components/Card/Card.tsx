@@ -17,13 +17,13 @@ const Card = (data: any) => {
   const dispatch = useDispatch();
 
   const handleAddVideo = () => {
-    if (!isAdded) {
-      dispatch(addVideo({ ...data.data, bookmark: true }));
-      setIsAdded(true);
-    }
     if (isAdded) {
       dispatch(removeVideo({ ...data.data, bookmark: false }));
       setIsAdded(false);
+    }
+    if (!isAdded) {
+      dispatch(addVideo({ ...data.data, bookmark: true }));
+      setIsAdded(true);
     }
   };
 
