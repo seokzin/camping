@@ -4,8 +4,12 @@ import styled from 'styled-components';
 import { Card } from '@/components/';
 import youtube from '@/services/youtube';
 import { SearchIcon } from '@/assets/icons';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/features/store';
 
 const Search = () => {
+  const videos = useSelector((state: RootState) => state.videos.videos);
+
   const [term, setTerm] = useState('');
   const [data, setData] = useState<any[]>([]);
 
@@ -32,20 +36,25 @@ const Search = () => {
         id,
       },
     });
-
     return response.data.items[0];
   };
 
   const onSubmit = async (e: any) => {
     if (term && (e.type === 'click' || e.key === 'Enter')) {
-      // const searchData = await getSearchInfo().then((res) => setData(res.data.items));
       const searchData = await getSearchInfo();
-
       const videosData = await Promise.all(
         searchData.map((item: any) => getVideosInfo(item.id.videoId)),
       );
 
-      setData(videosData);
+      const checkedData = videosData.map((item: any) => {
+        for (const video of videos) {
+          if (video.id === item.id) return { ...item, bookmark: true };
+        }
+
+        return { ...item, bookmark: false };
+      });
+
+      setData(checkedData);
     }
   };
 
