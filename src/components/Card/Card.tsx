@@ -2,45 +2,52 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 
-import { addVideo, removeVideo } from '@/features/videoSlice';
+import { playVideo, addVideo, removeVideo } from '@/features/videoSlice';
 import { getPlayTime, getTimeStamp } from '@/utils';
-import { BookmarkIcon } from '@/assets/icons';
+import { PlayIcon, BookmarkIcon } from '@/assets/icons';
+
+interface IBookmarkButton {
+  onClick: () => void;
+  isAdded: boolean;
+}
 
 const Card = (data: any) => {
-  const [isAdded, setIsAdded] = useState(false);
-
-  const movie = {
-    videoId: data.data.id,
-    title: data.data.snippet.title,
-    channelTitle: data.data.snippet.channelTitle,
-    thumbnail: data.data.snippet.thumbnails.medium.url,
-    duration: data.data.contentDetails?.duration ?? '',
-  };
+  const [isAdded, setIsAdded] = useState(data.data.bookmark);
 
   const dispatch = useDispatch();
 
   const handleAddVideo = () => {
     if (!isAdded) {
-      dispatch(addVideo(movie.videoId));
+      dispatch(addVideo({ ...data.data, bookmark: true }));
       setIsAdded(true);
     }
     if (isAdded) {
-      dispatch(removeVideo(movie.videoId));
+      dispatch(removeVideo({ ...data.data, bookmark: false }));
       setIsAdded(false);
     }
+  };
+
+  const handlePlayVideo = () => {
+    dispatch(playVideo(data.data));
   };
 
   return (
     <Layout>
       <ImageBox>
-        <BookmarkButton onClick={handleAddVideo}>
+        <PlayButton onClick={handlePlayVideo}>
+          <PlayIcon />
+        </PlayButton>
+
+        <BookmarkButton onClick={handleAddVideo} isAdded={isAdded}>
           <BookmarkIcon />
         </BookmarkButton>
-        <Image src={movie.thumbnail}></Image>
-        {movie.duration && <Duration>{getTimeStamp(getPlayTime(movie.duration))}</Duration>}
+        <Image src={data.data.snippet.thumbnails.medium.url}></Image>
+        {data.data.contentDetails.duration && (
+          <Duration>{getTimeStamp(getPlayTime(data.data.contentDetails.duration))}</Duration>
+        )}
       </ImageBox>
-      <Title>{movie.title}</Title>
-      <ChannelTitle>{movie.channelTitle}</ChannelTitle>
+      <Title>{data.data.snippet.title}</Title>
+      <ChannelTitle>{data.data.snippet.channelTitle}</ChannelTitle>
     </Layout>
   );
 };
@@ -65,15 +72,43 @@ const Image = styled.img`
   border-radius: 0.5rem;
 `;
 
-const BookmarkButton = styled.button`
+const PlayButton = styled.button`
+  position: absolute;
+  top: 0.5rem;
+  right: 3rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+
+  background-color: ${({ theme }) => theme.mode.subColor};
+  border: none;
+  }
+`;
+
+const BookmarkButton = styled.button<IBookmarkButton>`
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
-  background-color: transparent;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+
+  background-color: ${({ theme }) => theme.mode.subColor};
   border: none;
 
-  svg {
-    fill: ${({ theme }) => theme.mode.mainText};
+    svg {
+      fill: ${(props) => (props.isAdded ? ({ theme }) => theme.mode.mainText : 'none')}
+    }
   }
 `;
 
