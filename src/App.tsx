@@ -35,7 +35,7 @@ const App = () => {
 };
 
 const Layout = styled.div`
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -55,8 +55,7 @@ const Layout = styled.div`
 const Content = styled.div`
   box-sizing: border-box;
   padding: 1rem;
-  border-radius: 1rem;
-  height: calc(812px - 8.5rem);
+  min-height: calc(812px - 8.5rem);
 `;
 
 export default App;
