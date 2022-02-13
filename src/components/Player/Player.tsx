@@ -1,37 +1,52 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { dataVideo, dataVideoDetail } from '@/assets/data';
+import { useSelector } from 'react-redux';
+import YouTube from 'react-youtube';
+
+import { RootState } from '@/features/store';
 import { PlayIcon, PauseIcon, SkipBackIcon, SkipForwardIcon } from '@/assets/icons';
 
 import { getPlayTime, getTimeStamp } from '@/utils';
 
-const data = dataVideo.items[0].snippet;
-const duration = dataVideoDetail.items[0].contentDetails.duration;
-
 const Player = () => {
-  const video = {
-    title: data.title,
-    channel: data.channelTitle,
-    thumbnail: data.thumbnails.default.url,
-    duration,
+  const nowVideo = useSelector((state: RootState) => state.videos.nowVideo);
+  const [isPlay, setIsPlay] = useState(true);
+
+  const onClick = () => {
+    setIsPlay(!isPlay);
+    console.log(isPlay);
   };
+
+  const opts = {
+    height: '0',
+    width: '0',
+    playerVars: {
+      autoplay: 1,
+    },
+  };
+
+  // useEffect(() => {});
 
   return (
     <Layout>
-      <Image src={video.thumbnail} />
+      <Image src={nowVideo?.snippet.thumbnails.default.url} />
 
       <InfoBox>
-        <Title>{video.title}</Title>
-        <ChannelTitle>{video.channel}</ChannelTitle>
-        <Duration>
-          {getTimeStamp(324)} / {getTimeStamp(getPlayTime(duration))}
-        </Duration>
+        <Title>{nowVideo?.snippet.title}</Title>
+        <ChannelTitle>{nowVideo?.snippet.channelTitle}</ChannelTitle>
+        {nowVideo && (
+          <Duration>
+            {getTimeStamp(0)} /
+            {getTimeStamp(nowVideo && getPlayTime(nowVideo?.contentDetails.duration))}
+          </Duration>
+        )}
       </InfoBox>
+
+      {/* <YouTube width={0} height={0} videoId={nowVideo?.id} onPlay={isPlay} onPause={isPlay} /> */}
 
       <ControllerBox>
         <SkipBackIcon width={20} height={20} />
-        <PlayIcon />
-        {/* <PauseIcon /> */}
+        {isPlay ? <PlayIcon onClick={onClick} /> : <PauseIcon onClick={onClick} />}
         <SkipForwardIcon width={20} height={20} />
       </ControllerBox>
     </Layout>
@@ -59,6 +74,11 @@ const Layout = styled.div`
   svg path {
     fill: ${({ theme }) => theme.mode.mainText};
   }
+
+  iframe {
+    width: 1rem;
+    height: 1rem;
+  }
 `;
 
 const InfoBox = styled.div`
@@ -69,7 +89,6 @@ const InfoBox = styled.div`
 const Title = styled.h1`
   font-size: ${({ theme }) => theme.fontSize.sm};
   color: ${({ theme }) => theme.mode.mainText};
-  margin-bottom: 0.2rem;
 
   overflow: hidden;
   display: -webkit-box;
@@ -89,7 +108,7 @@ const Image = styled.img`
 `;
 
 const Duration = styled.p`
-  margin-top: 0.3rem;
+  margin-top: 0.2rem;
   font-size: ${({ theme }) => theme.fontSize.xs};
   color: ${({ theme }) => theme.mode.subText};
 `;
