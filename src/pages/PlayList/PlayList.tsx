@@ -7,35 +7,20 @@ import { Card, Spinner } from '@/components';
 import styled from 'styled-components';
 
 const PlayList = () => {
-  const [data, setData] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-
   const videos = useSelector((state: RootState) => state.videos.videos);
 
-  const fetchData = async () => {
-    videos.map((item: string) =>
-      youtube
-        .get('/videos', {
-          params: {
-            part: 'snippet, contentDetails',
-            id: item,
-          },
-        })
-        .then((res: any) => setData(res.data.items)),
-    );
+  // TODO: isLoading 어떻게 처리?
+  const [loading, setLoading] = useState(true);
 
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, [videos]);
+  console.log('list', videos);
 
   return (
     <>
       <Title>Playlist</Title>
 
-      {loading ? <Spinner /> : data?.map((item, index) => <Card data={item} key={index} />)}
+      {videos?.map((item, index) => (
+        <Card data={item} key={index} />
+      ))}
     </>
   );
 };
