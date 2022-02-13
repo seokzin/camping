@@ -87,6 +87,9 @@ const PlayButton = styled.button`
 
   background-color: ${({ theme }) => theme.mode.subColor};
   border: none;
+
+  svg {
+    fill: ${({ theme }) => theme.mode.mainText};
   }
 `;
 
@@ -106,9 +109,8 @@ const BookmarkButton = styled.button<IBookmarkButton>`
   background-color: ${({ theme }) => theme.mode.subColor};
   border: none;
 
-    svg {
-      fill: ${(props) => (props.isAdded ? ({ theme }) => theme.mode.mainText : 'none')}
-    }
+  svg {
+    fill: ${(props) => (props.isAdded ? ({ theme }) => theme.mode.mainText : 'none')};
   }
 `;
 
