@@ -3,8 +3,12 @@ import styled from 'styled-components';
 
 import youtube from '@/services/youtube';
 import { Card, Spinner } from '@/components/';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/features/store';
 
 const Home = () => {
+  const videos = useSelector((state: RootState) => state.videos.videos);
+
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -12,20 +16,29 @@ const Home = () => {
     const response = await youtube.get('/videos', {
       params: {
         part: 'snippet,contentDetails',
-        // q: term,
         chart: 'mostPopular',
-        maxResults: 10,
+        maxResults: 3,
         regionCode: 'KR',
         videoCategoryId: '10', // Music
       },
     });
-    setData(response.data.items);
+
+    const checkedData = response.data.items.map((item: any) => {
+      for (const video of videos) {
+        if (video.id === item.id) return { ...item, bookmark: true };
+      }
+
+      return { ...item, bookmark: false };
+    });
+
+    setData(checkedData);
     setLoading(false);
-    console.log(data);
   };
 
   useEffect(() => {
     fetchData();
+
+    console.log('this', data);
   }, []);
 
   return (
