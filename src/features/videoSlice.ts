@@ -5,6 +5,8 @@ interface VideoState {
   // nowVideo: Video;
   nowVideo: any;
   videos: Video[];
+  status: 'loading' | 'success' | 'failed';
+  popular: any;
 }
 
 interface Video {
@@ -19,10 +21,12 @@ interface Video {
 const initialState: VideoState = {
   nowVideo: undefined,
   videos: [],
+  status: 'loading',
+  popular: [],
 };
 
-export const getVideos = createAsyncThunk('GET_VIDEOS', async () => {
-  const response = await youtube.get('/videos', {
+export const getPopular = createAsyncThunk('videos/getPopular', async () => {
+  return await youtube.get('/videos', {
     params: {
       part: 'snippet,contentDetails',
       chart: 'mostPopular',
@@ -31,8 +35,6 @@ export const getVideos = createAsyncThunk('GET_VIDEOS', async () => {
       videoCategoryId: '10', // Music
     },
   });
-
-  return response;
 });
 
 export const videoSlice = createSlice({
@@ -43,7 +45,9 @@ export const videoSlice = createSlice({
       state.nowVideo = action.payload;
     },
     addVideo: (state, action: PayloadAction<Video>) => {
-      state.videos.push(action.payload);
+      if (!state.videos.includes(action.payload)) {
+        state.videos.push(action.payload);
+      }
     },
     removeVideo: (state, action: PayloadAction<Video>) => {
       state.videos = state.videos.filter((item) => item.id !== action.payload.id);
