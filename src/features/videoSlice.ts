@@ -53,6 +53,21 @@ export const videoSlice = createSlice({
       state.videos = state.videos.filter((item) => item.id !== action.payload.id);
     },
   },
+
+  extraReducers: (builder) => {
+    builder.addCase(getPopular.pending, (state, action) => {
+      state.status = 'loading';
+    });
+
+    builder.addCase(getPopular.fulfilled, (state, action) => {
+      state.status = 'success';
+      state.popular = action.payload;
+    });
+
+    builder.addCase(getPopular.rejected, (state, action) => {
+      state.status = 'failed';
+    });
+  },
 });
 
 export const { playVideo, addVideo, removeVideo } = videoSlice.actions;
