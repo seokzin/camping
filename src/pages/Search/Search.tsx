@@ -5,56 +5,39 @@ import { Card } from '@/components/';
 import youtube from '@/services/youtube';
 import { SearchIcon } from '@/assets/icons';
 import { useSelector } from 'react-redux';
-import { RootState } from '@/features/store';
+import { RootState, useAppDispatch } from '@/features/store';
+import { getSearch, Video } from '@/features/videoSlice';
 
 const Search = () => {
-  const videos = useSelector((state: RootState) => state.videos.videos);
+  const playList = useSelector((state: RootState) => state.videos.playList);
 
   const [term, setTerm] = useState('');
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<Video[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const onChange = (e: any) => {
     setTerm(e.target.value);
   };
 
-  const getSearchInfo = async () => {
-    const response = await youtube.get('/search', {
-      params: {
-        part: 'snippet',
-        q: term,
-        maxResults: 10,
-        regionCode: 'KR',
-      },
-    });
-    return response.data.items;
-  };
+  // const videos = useSelector((state: RootState) => state.videos.popularList);
 
-  const getVideosInfo = async (id: string) => {
-    const response = await youtube.get('/videos', {
-      params: {
-        part: 'snippet, contentDetails',
-        id,
-      },
-    });
-    return response.data.items[0];
-  };
+  const dispatch = useAppDispatch();
 
   const onSubmit = async (e: any) => {
     if (term && (e.type === 'click' || e.key === 'Enter')) {
-      const searchData = await getSearchInfo();
-      const videosData = await Promise.all(
-        searchData.map((item: any) => getVideosInfo(item.id.videoId)),
-      );
+      setLoading(true);
+      const response = await dispatch(getSearch(term));
 
-      const checkedData = videosData.map((item: any) => {
-        for (const video of videos) {
-          if (video.id === item.id) return { ...item, bookmark: true };
-        }
+      // const checkedData = videosData.map((item: any) => {
+      //   for (const video of videos) {
+      //     if (video.id === item.id) return { ...item, bookmark: true };
+      //   }
 
-        return { ...item, bookmark: false };
-      });
+      //   return { ...item, bookmark: false };
+      // });
 
-      setData(checkedData);
+      setData(response.payload);
+      setLoading(false);
     }
   };
 
