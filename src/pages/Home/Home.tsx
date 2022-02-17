@@ -4,26 +4,31 @@ import styled from 'styled-components';
 import youtube from '@/services/youtube';
 import { Card, Spinner } from '@/components/';
 import { useSelector } from 'react-redux';
-import { RootState } from '@/features/store';
+import { RootState, useAppDispatch } from '@/features/store';
+import { getPopular } from '@/features/videoSlice';
+
+interface Video {
+  id: string;
+  title: string;
+  channelTitle: string;
+  thumbnail: string;
+  duration: string;
+  bookmark: boolean;
+}
 
 const Home = () => {
   const videos = useSelector((state: RootState) => state.videos.videos);
 
-  const [data, setData] = useState<any[]>([]);
+  const dispatch = useAppDispatch();
+
+  const [data, setData] = useState<Video[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
-    const response = await youtube.get('/videos', {
-      params: {
-        part: 'snippet,contentDetails',
-        chart: 'mostPopular',
-        maxResults: 3,
-        regionCode: 'KR',
-        videoCategoryId: '10', // Music
-      },
-    });
+    const response = await dispatch(getPopular());
 
-    const checkedData = response.data.items.map((item: any) => {
+    const checkedData = await response.payload.items.map((item: Video) => {
+      // for를 다른 방법으로 리팩토링
       for (const video of videos) {
         if (video.id === item.id) return { ...item, bookmark: true };
       }
@@ -37,9 +42,7 @@ const Home = () => {
 
   useEffect(() => {
     fetchData();
-
-    console.log('this', data);
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
