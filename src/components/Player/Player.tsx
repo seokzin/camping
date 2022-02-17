@@ -14,7 +14,6 @@ const Player = () => {
 
   const onClick = () => {
     setIsPlay(!isPlay);
-    console.log(isPlay);
   };
 
   const opts = {
@@ -25,19 +24,16 @@ const Player = () => {
     },
   };
 
-  // useEffect(() => {});
-
   return (
     <Layout>
-      <Image src={nowVideo?.snippet.thumbnails.default.url} />
+      <Image src={nowVideo?.thumbnail} />
 
       <InfoBox>
-        <Title>{nowVideo?.snippet.title}</Title>
-        <ChannelTitle>{nowVideo?.snippet.channelTitle}</ChannelTitle>
+        <Title>{nowVideo?.title}</Title>
+        <ChannelTitle>{nowVideo?.channelTitle}</ChannelTitle>
         {nowVideo && (
           <Duration>
-            {getTimeStamp(0)} /
-            {getTimeStamp(nowVideo && getPlayTime(nowVideo?.contentDetails.duration))}
+            {getTimeStamp(0)} /{getTimeStamp(nowVideo && getPlayTime(nowVideo?.duration))}
           </Duration>
         )}
       </InfoBox>
