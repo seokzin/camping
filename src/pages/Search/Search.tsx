@@ -6,20 +6,18 @@ import youtube from '@/services/youtube';
 import { SearchIcon } from '@/assets/icons';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '@/features/store';
-import { getSearch, Video } from '@/features/videoSlice';
+import { getSearch, Video, saveKeyword } from '@/features/videoSlice';
 
 const Search = () => {
   const playList = useSelector((state: RootState) => state.videos.playList);
+  const term = useSelector((state: RootState) => state.videos.searchKeyword);
 
-  const [term, setTerm] = useState('');
   const [data, setData] = useState<Video[]>([]);
   const [loading, setLoading] = useState(true);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTerm(e.target.value);
+    dispatch(saveKeyword(e.target.value));
   };
-
-  // const videos = useSelector((state: RootState) => state.videos.popularList);
 
   const dispatch = useAppDispatch();
 
@@ -28,14 +26,6 @@ const Search = () => {
     if (term && (e.type === 'click' || e.key === 'Enter')) {
       setLoading(true);
       const response = await dispatch(getSearch(term));
-
-      // const checkedData = videosData.map((item: Video) => {
-      //   for (const video of videos) {
-      //     if (video.id === item.id) return { ...item, bookmark: true };
-      //   }
-
-      //   return { ...item, bookmark: false };
-      // });
 
       setData(response.payload);
       setLoading(false);
