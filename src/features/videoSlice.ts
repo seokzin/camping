@@ -111,10 +111,11 @@ export const videoSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-      .addCase(getPopular.fulfilled, (state, action) => {
+      .addCase(getPopular.fulfilled, (state, action: PayloadAction<Video[]>) => {
         state.popularList = action.payload;
       })
-      .addCase(getSearch.fulfilled, (state, action) => {
+      .addCase(getSearch.fulfilled, (state, action: PayloadAction<Video[]>) => {
+        console.log('나', action);
         state.searchList = action.payload;
       });
   },
