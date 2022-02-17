@@ -25,7 +25,7 @@ const initialState: VideoState = {
   searchList: [],
 };
 
-const simplifyData = (rawData: any): any => {
+const simplifyData = (rawData: any): Video => {
   return {
     id: rawData.id,
     title: rawData.snippet.title,
