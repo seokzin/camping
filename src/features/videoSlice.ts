@@ -11,7 +11,7 @@ interface VideoState {
 
 // interface를 페이지 단에서 불러오는 방법 - export
 interface Video {
-  id: string;
+  id: any;
   title: string;
   channelTitle: string;
   thumbnail: string;
@@ -43,26 +43,42 @@ export const getPopular = createAsyncThunk('videos/getPopular', async () => {
   return response.data;
 });
 
-export const getSearchInfo = createAsyncThunk('videos/getSearchInfo', async (term: string) => {
-  const response = await youtube.get('/search', {
-    params: {
-      part: 'snippet',
-      q: term,
-      maxResults: 10,
-      regionCode: 'KR',
-    },
-  });
-  return response.data.items;
-});
+export const getSearch = createAsyncThunk('videos/getSearch', async (term: string) => {
+  const getSearchInfo = async () => {
+    const response = await youtube.get('/search', {
+      params: {
+        part: 'snippet',
+        q: term,
+        maxResults: 10,
+        regionCode: 'KR',
+      },
+    });
+    return response.data.items;
+  };
 
-export const getVideosInfo = createAsyncThunk('videos/getVideosInfo', async (id: string) => {
-  const response = await youtube.get('/videos', {
-    params: {
-      part: 'snippet, contentDetails',
-      id,
-    },
-  });
-  return response.data.items[0];
+  const getVideosInfo = async (id: string) => {
+    const response = await youtube.get('/videos', {
+      params: {
+        part: 'snippet, contentDetails',
+        id,
+      },
+    });
+    return response.data.items[0];
+  };
+
+  const searchData = await getSearchInfo();
+  const videosData = await Promise.all(
+    searchData.map((item: Video) => getVideosInfo(item.id.videoId)),
+  );
+
+  return videosData;
+  // const checkedData = videosData.map((item: any) => {
+  //   for (const video of state.playList) {
+  //     if (video.id === item.id) return { ...item, bookmark: true };
+  //   }
+
+  //   return { ...item, bookmark: false };
+  // });
 });
 
 export const videoSlice = createSlice({
@@ -84,9 +100,13 @@ export const videoSlice = createSlice({
   },
 
   extraReducers: (builder) => {
-    builder.addCase(getPopular.fulfilled, (state, action) => {
-      state.popularList = action.payload;
-    });
+    builder
+      .addCase(getPopular.fulfilled, (state, action) => {
+        state.popularList = action.payload;
+      })
+      .addCase(getSearch.fulfilled, (state, action) => {
+        state.searchList = action.payload;
+      });
   },
 });
 
