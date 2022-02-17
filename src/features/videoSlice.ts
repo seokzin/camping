@@ -2,8 +2,7 @@ import youtube from '@/services/youtube';
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 
 interface VideoState {
-  // nowVideo: Video;
-  nowVideo: any;
+  nowVideo: Video | undefined;
   playList: Video[];
   popularList: Video[];
   searchList: Video[];
