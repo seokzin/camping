@@ -5,19 +5,10 @@ import youtube from '@/services/youtube';
 import { Card, Spinner } from '@/components/';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '@/features/store';
-import { getPopular } from '@/features/videoSlice';
-
-interface Video {
-  id: string;
-  title: string;
-  channelTitle: string;
-  thumbnail: string;
-  duration: string;
-  bookmark: boolean;
-}
+import { getPopular, Video } from '@/features/videoSlice';
 
 const Home = () => {
-  const videos = useSelector((state: RootState) => state.videos.videos);
+  const videos = useSelector((state: RootState) => state.videos.popularList);
 
   const dispatch = useAppDispatch();
 

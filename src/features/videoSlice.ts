@@ -9,7 +9,7 @@ interface VideoState {
 }
 
 // interface를 페이지 단에서 불러오는 방법 - export
-interface Video {
+export interface Video {
   id: any;
   title: string;
   channelTitle: string;
