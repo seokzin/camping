@@ -36,10 +36,7 @@ const simplifyData = (rawData: any): Video => {
   };
 };
 
-// 변수명을 명확히 data는 너무 포괄적
-// data.data로 들어가는 구조를 개선하기
 export const getPopular = createAsyncThunk('videos/getPopular', async () => {
-  // 데이터를 전부 활용하지 않고 실질적 타입 정의가 필요하다. (굳이 객체 변환까지는 선택사항)
   const response = await youtube.get('/videos', {
     params: {
       part: 'snippet, contentDetails',
@@ -76,12 +73,19 @@ export const getSearch = createAsyncThunk('videos/getSearch', async (term: strin
     return response.data.items[0];
   };
 
-  const searchData = await getSearchInfo();
-  const videosData = await Promise.all(
-    searchData.map((item: any) => getVideosInfo(item.id.videoId)),
-  );
+  // 기존 코드 : videosData에 Video[]가 담겨서 payload에 unknown 에러..
+  // const searchData = await getSearchInfo();
+  // const videosData = await Promise.all(
+  //   searchData.map((item: any) => getVideosInfo(item.id.videoId)),
+  // );
 
-  return videosData.map((item) => simplifyData(item));
+  // return videosData.map((item) => simplifyData(item));
+
+  let searchData = await getSearchInfo();
+  searchData = await Promise.all(searchData.map((item: any) => getVideosInfo(item.id.videoId)));
+
+  return searchData.map((item: any) => simplifyData(item));
+
   // const checkedData = videosData.map((item: any) => {
   //   for (const video of state.playList) {
   //     if (video.id === item.id) return { ...item, bookmark: true };
@@ -115,7 +119,6 @@ export const videoSlice = createSlice({
         state.popularList = action.payload;
       })
       .addCase(getSearch.fulfilled, (state, action: PayloadAction<Video[]>) => {
-        console.log('나', action);
         state.searchList = action.payload;
       });
   },

@@ -37,8 +37,7 @@ const Search = () => {
       //   return { ...item, bookmark: false };
       // });
 
-      console.log(response);
-      // setData(response.payload);
+      setData(response.payload);
       setLoading(false);
     }
   };
