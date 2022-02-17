@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 
-import { playVideo, addVideo, removeVideo } from '@/features/videoSlice';
+import { playVideo, addVideo, removeVideo, Video } from '@/features/videoSlice';
 import { getPlayTime, getTimeStamp } from '@/utils';
 import { PlayIcon, BookmarkIcon } from '@/assets/icons';
 
@@ -11,24 +11,28 @@ interface IBookmarkButton {
   isAdded: boolean;
 }
 
-const Card = (data: any) => {
-  const [isAdded, setIsAdded] = useState(data.data.bookmark);
+// Card의 prop에 대해 정의를 해줘야 갖다 쓰는 입장에서 가이드가 됨
+const Card = (data: Video) => {
+  console.log(data);
+
+  const [isAdded, setIsAdded] = useState(data.bookmark);
 
   const dispatch = useDispatch();
 
+  // store depandency가 존재 -> Card의 로직이 딥한 부분 + store 로직이 섞여서 재활용성 낮음
   const handleAddVideo = () => {
     if (isAdded) {
-      dispatch(removeVideo({ ...data.data, bookmark: false }));
+      dispatch(removeVideo({ ...data, bookmark: false }));
       setIsAdded(false);
     }
     if (!isAdded) {
-      dispatch(addVideo({ ...data.data, bookmark: true }));
+      dispatch(addVideo({ ...data, bookmark: true }));
       setIsAdded(true);
     }
   };
 
   const handlePlayVideo = () => {
-    dispatch(playVideo(data.data));
+    dispatch(playVideo(data));
   };
 
   return (
@@ -41,17 +45,16 @@ const Card = (data: any) => {
         <BookmarkButton onClick={handleAddVideo} isAdded={isAdded}>
           <BookmarkIcon />
         </BookmarkButton>
-        <Image src={data.data.snippet.thumbnails.medium.url}></Image>
-        {data.data.contentDetails.duration && (
-          <Duration>{getTimeStamp(getPlayTime(data.data.contentDetails.duration))}</Duration>
-        )}
+        <Image src={data.thumbnail}></Image>
+        {data.duration && <Duration>{getTimeStamp(getPlayTime(data.duration))}</Duration>}
       </ImageBox>
-      <Title>{data.data.snippet.title}</Title>
-      <ChannelTitle>{data.data.snippet.channelTitle}</ChannelTitle>
+      <Title>{data.title}</Title>
+      <ChannelTitle>{data.channelTitle}</ChannelTitle>
     </Layout>
   );
 };
 
+// 비즈니스 로직에 스타일 코드가 과한 부분
 const Layout = styled.div`
   margin-bottom: 2rem;
 
