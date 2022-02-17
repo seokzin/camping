@@ -10,7 +10,7 @@ interface VideoState {
 
 // interface를 페이지 단에서 불러오는 방법 - export
 export interface Video {
-  id: any;
+  id: string;
   title: string;
   channelTitle: string;
   thumbnail: string;
@@ -25,13 +25,24 @@ const initialState: VideoState = {
   searchList: [],
 };
 
+const simplifyData = (rawData: any): any => {
+  return {
+    id: rawData.id,
+    title: rawData.snippet.title,
+    channelTitle: rawData.snippet.channelTitle,
+    thumbnail: rawData.snippet.thumbnails.medium.url,
+    duration: rawData.contentDetails.duration,
+    bookmark: false,
+  };
+};
+
 // 변수명을 명확히 data는 너무 포괄적
 // data.data로 들어가는 구조를 개선하기
 export const getPopular = createAsyncThunk('videos/getPopular', async () => {
   // 데이터를 전부 활용하지 않고 실질적 타입 정의가 필요하다. (굳이 객체 변환까지는 선택사항)
   const response = await youtube.get('/videos', {
     params: {
-      part: 'snippet,contentDetails',
+      part: 'snippet, contentDetails',
       chart: 'mostPopular',
       maxResults: 10,
       regionCode: 'KR',
@@ -39,7 +50,7 @@ export const getPopular = createAsyncThunk('videos/getPopular', async () => {
     },
   });
 
-  return response.data;
+  return response.data.items.map((item: any) => simplifyData(item));
 });
 
 export const getSearch = createAsyncThunk('videos/getSearch', async (term: string) => {
@@ -67,10 +78,10 @@ export const getSearch = createAsyncThunk('videos/getSearch', async (term: strin
 
   const searchData = await getSearchInfo();
   const videosData = await Promise.all(
-    searchData.map((item: Video) => getVideosInfo(item.id.videoId)),
+    searchData.map((item: any) => getVideosInfo(item.id.videoId)),
   );
 
-  return videosData;
+  return videosData.map((item) => simplifyData(item));
   // const checkedData = videosData.map((item: any) => {
   //   for (const video of state.playList) {
   //     if (video.id === item.id) return { ...item, bookmark: true };
