@@ -11,8 +11,13 @@ interface IBookmarkButton {
   isAdded: boolean;
 }
 
-// Card의 prop에 대해 정의를 해줘야 갖다 쓰는 입장에서 가이드가 됨
-const Card = (data: Video) => {
+// props를 인터페이스로 분리해야만 부모에서 자식에게 props 전달할 때 에러 발생 X
+// 에러: is not assignable to type 'IntrinsicAttributes
+interface Props {
+  data: Video;
+}
+
+const Card = ({ data }: Props) => {
   console.log(data);
 
   const [isAdded, setIsAdded] = useState(data.bookmark);
