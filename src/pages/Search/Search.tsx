@@ -9,25 +9,21 @@ import { RootState, useAppDispatch } from '@/features/store';
 import { getSearch, Video, saveKeyword } from '@/features/videoSlice';
 
 const Search = () => {
-  const playList = useSelector((state: RootState) => state.videos.playList);
+  const searchList = useSelector((state: RootState) => state.videos.searchList);
   const term = useSelector((state: RootState) => state.videos.searchKeyword);
+  const dispatch = useAppDispatch();
 
-  const [data, setData] = useState<Video[]>([]);
   const [loading, setLoading] = useState(true);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(saveKeyword(e.target.value));
   };
 
-  const dispatch = useAppDispatch();
-
   // FIXME: 어떤 event type도 e.key를 해결하지 못했음
   const onSubmit = async (e: React.MouseEvent | any) => {
     if (term && (e.type === 'click' || e.key === 'Enter')) {
       setLoading(true);
-      const response = await dispatch(getSearch(term));
-
-      setData(response.payload);
+      dispatch(getSearch(term));
       setLoading(false);
     }
   };
@@ -44,7 +40,7 @@ const Search = () => {
         <SearchIcon width={26} height={26} onClick={onSubmit} />
       </Layout>
 
-      {data?.map((item, index) => (
+      {searchList?.map((item, index) => (
         <Card data={item} key={index} />
       ))}
     </>
