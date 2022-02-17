@@ -15,7 +15,7 @@ const Search = () => {
   const [data, setData] = useState<Video[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const onChange = (e: any) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTerm(e.target.value);
   };
 
@@ -23,12 +23,13 @@ const Search = () => {
 
   const dispatch = useAppDispatch();
 
-  const onSubmit = async (e: any) => {
+  // FIXME: 어떤 event type도 e.key를 해결하지 못했음
+  const onSubmit = async (e: React.MouseEvent | any) => {
     if (term && (e.type === 'click' || e.key === 'Enter')) {
       setLoading(true);
       const response = await dispatch(getSearch(term));
 
-      // const checkedData = videosData.map((item: any) => {
+      // const checkedData = videosData.map((item: Video) => {
       //   for (const video of videos) {
       //     if (video.id === item.id) return { ...item, bookmark: true };
       //   }
@@ -36,7 +37,8 @@ const Search = () => {
       //   return { ...item, bookmark: false };
       // });
 
-      setData(response.payload);
+      console.log(response);
+      // setData(response.payload);
       setLoading(false);
     }
   };
