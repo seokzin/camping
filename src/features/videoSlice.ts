@@ -1,5 +1,5 @@
 import youtube from '@/services/youtube';
-import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, createAsyncThunk, current } from '@reduxjs/toolkit';
 
 interface VideoState {
   nowVideo: Video | undefined;
@@ -34,6 +34,15 @@ const simplifyData = (rawData: any): Video => {
     duration: rawData.contentDetails.duration,
     bookmark: false,
   };
+};
+
+const checkData = (myList: Video[], newList: Video[]): Video[] => {
+  return newList.map((item: Video) => {
+    for (const video of myList) {
+      if (video.id === item.id) return { ...item, bookmark: true };
+    }
+    return { ...item, bookmark: false };
+  });
 };
 
 export const getPopular = createAsyncThunk('videos/getPopular', async () => {
@@ -85,14 +94,6 @@ export const getSearch = createAsyncThunk('videos/getSearch', async (term: strin
   searchData = await Promise.all(searchData.map((item: any) => getVideosInfo(item.id.videoId)));
 
   return searchData.map((item: any) => simplifyData(item));
-
-  // const checkedData = videosData.map((item: any) => {
-  //   for (const video of state.playList) {
-  //     if (video.id === item.id) return { ...item, bookmark: true };
-  //   }
-
-  //   return { ...item, bookmark: false };
-  // });
 });
 
 export const videoSlice = createSlice({
@@ -103,8 +104,7 @@ export const videoSlice = createSlice({
       state.nowVideo = action.payload;
     },
     addVideo: (state, action: PayloadAction<Video>) => {
-      // TODO: 중복 로직 테스트
-      if (!state.playList.includes(action.payload)) {
+      if (!current(state.playList).includes(action.payload)) {
         state.playList.push(action.payload);
       }
     },
@@ -116,10 +116,10 @@ export const videoSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getPopular.fulfilled, (state, action: PayloadAction<Video[]>) => {
-        state.popularList = action.payload;
+        state.popularList = checkData(current(state.playList), action.payload);
       })
       .addCase(getSearch.fulfilled, (state, action: PayloadAction<Video[]>) => {
-        state.searchList = action.payload;
+        state.searchList = checkData(current(state.playList), action.payload);
       });
   },
 });
