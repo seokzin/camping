@@ -41,6 +41,28 @@ export const getPopular = createAsyncThunk('videos/getPopular', async () => {
   return response.data;
 });
 
+export const getSearchInfo = createAsyncThunk('videos/getSearchInfo', async (term: string) => {
+  const response = await youtube.get('/search', {
+    params: {
+      part: 'snippet',
+      q: term,
+      maxResults: 10,
+      regionCode: 'KR',
+    },
+  });
+  return response.data.items;
+});
+
+export const getVideosInfo = createAsyncThunk('videos/getVideosInfo', async (id: string) => {
+  const response = await youtube.get('/videos', {
+    params: {
+      part: 'snippet, contentDetails',
+      id,
+    },
+  });
+  return response.data.items[0];
+});
+
 export const videoSlice = createSlice({
   name: 'videos',
   initialState,
