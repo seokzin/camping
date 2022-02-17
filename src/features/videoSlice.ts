@@ -4,8 +4,9 @@ import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 interface VideoState {
   // nowVideo: Video;
   nowVideo: any;
-  videos: Video[];
-  popular: any;
+  playList: Video[];
+  popularList: Video[];
+  searchList: Video[];
 }
 
 // interface를 페이지 단에서 불러오는 방법 - export
@@ -20,8 +21,9 @@ interface Video {
 
 const initialState: VideoState = {
   nowVideo: undefined,
-  videos: [],
-  popular: [],
+  playList: [],
+  popularList: [],
+  searchList: [],
 };
 
 // 변수명을 명확히 data는 너무 포괄적
@@ -72,18 +74,18 @@ export const videoSlice = createSlice({
     },
     addVideo: (state, action: PayloadAction<Video>) => {
       // TODO: 중복 로직 테스트
-      if (!state.videos.includes(action.payload)) {
-        state.videos.push(action.payload);
+      if (!state.playList.includes(action.payload)) {
+        state.playList.push(action.payload);
       }
     },
     removeVideo: (state, action: PayloadAction<Video>) => {
-      state.videos = state.videos.filter((item) => item.id !== action.payload.id);
+      state.playList = state.playList.filter((item) => item.id !== action.payload.id);
     },
   },
 
   extraReducers: (builder) => {
     builder.addCase(getPopular.fulfilled, (state, action) => {
-      state.popular = action.payload;
+      state.popularList = action.payload;
     });
   },
 });
