@@ -1,10 +1,12 @@
 import youtube from '@/services/youtube';
 import { createSlice, PayloadAction, createAsyncThunk, current } from '@reduxjs/toolkit';
+import { RootState } from '@/features/store';
 
 interface VideoState {
   nowVideo: Video | undefined;
   playList: Video[];
   popularList: Video[];
+  searchKeyword: string;
   searchList: Video[];
 }
 
@@ -22,6 +24,7 @@ const initialState: VideoState = {
   nowVideo: undefined,
   playList: [],
   popularList: [],
+  searchKeyword: '',
   searchList: [],
 };
 
@@ -111,6 +114,9 @@ export const videoSlice = createSlice({
     removeVideo: (state, action: PayloadAction<Video>) => {
       state.playList = state.playList.filter((item) => item.id !== action.payload.id);
     },
+    saveKeyword: (state, action) => {
+      state.searchKeyword = action.payload;
+    },
   },
 
   extraReducers: (builder) => {
@@ -124,5 +130,8 @@ export const videoSlice = createSlice({
   },
 });
 
-export const { playVideo, addVideo, removeVideo } = videoSlice.actions;
+export const { playVideo, addVideo, removeVideo, saveKeyword } = videoSlice.actions;
+export const getPlayListSelector = (state: RootState) => state.videos.playList;
+export const getSearchListSelector = (state: RootState) => state.videos.searchList;
+export const getTermSelector = (state: RootState) => state.videos.searchKeyword;
 export default videoSlice.reducer;

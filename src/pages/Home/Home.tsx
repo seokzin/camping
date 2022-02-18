@@ -4,30 +4,20 @@ import styled from 'styled-components';
 import youtube from '@/services/youtube';
 import { Card, Spinner } from '@/components/';
 import { useSelector } from 'react-redux';
-import { RootState, useAppDispatch } from '@/features/store';
-import { getPopular, Video } from '@/features/videoSlice';
+import { useAppDispatch } from '@/features/store';
+import { getPopular, Video, getPlayListSelector } from '@/features/videoSlice';
 
 const Home = () => {
-  const videos = useSelector((state: RootState) => state.videos.popularList);
-
+  const playList = useSelector(getPlayListSelector);
   const dispatch = useAppDispatch();
 
   const [data, setData] = useState<Video[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
+    setLoading(true);
     const response = await dispatch(getPopular());
-
-    const checkedData = await response.payload.items.map((item: Video) => {
-      // for를 다른 방법으로 리팩토링
-      for (const video of videos) {
-        if (video.id === item.id) return { ...item, bookmark: true };
-      }
-
-      return { ...item, bookmark: false };
-    });
-
-    setData(checkedData);
+    setData(response.payload);
     setLoading(false);
   };
 

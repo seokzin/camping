@@ -5,15 +5,22 @@ import { Card } from '@/components/';
 import youtube from '@/services/youtube';
 import { SearchIcon } from '@/assets/icons';
 import { useSelector } from 'react-redux';
-import { RootState, useAppDispatch } from '@/features/store';
-import { getSearch, Video, saveKeyword } from '@/features/videoSlice';
+import { useAppDispatch } from '@/features/store';
+import {
+  getSearch,
+  saveKeyword,
+  getSearchListSelector,
+  getTermSelector,
+} from '@/features/videoSlice';
 
 const Search = () => {
-  const searchList = useSelector((state: RootState) => state.videos.searchList);
-  const term = useSelector((state: RootState) => state.videos.searchKeyword);
+  const searchList = useSelector(getSearchListSelector);
+  const term = useSelector(getTermSelector);
+
   const dispatch = useAppDispatch();
 
-  const [loading, setLoading] = useState(true);
+  // TODO: loading 로직 redux로 옮기기
+  // const [loading, setLoading] = useState(true);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(saveKeyword(e.target.value));
@@ -22,9 +29,9 @@ const Search = () => {
   // FIXME: 어떤 event type도 e.key를 해결하지 못했음
   const onSubmit = async (e: React.MouseEvent | any) => {
     if (term && (e.type === 'click' || e.key === 'Enter')) {
-      setLoading(true);
+      // setLoading(true);
       dispatch(getSearch(term));
-      setLoading(false);
+      // setLoading(false);
     }
   };
 
