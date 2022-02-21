@@ -134,4 +134,5 @@ export const { playVideo, addVideo, removeVideo, saveKeyword } = videoSlice.acti
 export const getPlayListSelector = (state: RootState) => state.videos.playList;
 export const getSearchListSelector = (state: RootState) => state.videos.searchList;
 export const getTermSelector = (state: RootState) => state.videos.searchKeyword;
+export const getVideoSelector = (state: RootState) => state.videos.nowVideo;
 export default videoSlice.reducer;

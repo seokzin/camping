@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import { Card } from '@/components/';
-import youtube from '@/services/youtube';
 import { SearchIcon } from '@/assets/icons';
 import { useSelector } from 'react-redux';
-import { useAppDispatch } from '@/features/store';
+import { useAppDispatch } from '@/features/store.hooks';
 import {
   getSearch,
   saveKeyword,
@@ -20,8 +19,6 @@ const Search = () => {
   const dispatch = useAppDispatch();
 
   // TODO: loading 로직 redux로 옮기기
-  // const [loading, setLoading] = useState(true);
-
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(saveKeyword(e.target.value));
   };
@@ -29,9 +26,7 @@ const Search = () => {
   // FIXME: 어떤 event type도 e.key를 해결하지 못했음
   const onSubmit = async (e: React.MouseEvent | any) => {
     if (term && (e.type === 'click' || e.key === 'Enter')) {
-      // setLoading(true);
       dispatch(getSearch(term));
-      // setLoading(false);
     }
   };
 

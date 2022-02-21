@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Card, Spinner } from '@/components';
@@ -7,9 +7,6 @@ import { getPlayListSelector } from '@/features/videoSlice';
 
 const PlayList = () => {
   const playList = useSelector(getPlayListSelector);
-
-  // TODO: isLoading 어떻게 처리?
-  const [loading, setLoading] = useState(true);
 
   return (
     <>

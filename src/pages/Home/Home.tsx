@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import youtube from '@/services/youtube';
 import { Card, Spinner } from '@/components/';
 import { useSelector } from 'react-redux';
-import { useAppDispatch } from '@/features/store';
+import { useAppDispatch } from '@/features/store.hooks';
 import { getPopular, Video, getPlayListSelector } from '@/features/videoSlice';
 
 const Home = () => {

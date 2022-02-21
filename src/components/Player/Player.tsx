@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import YouTube from 'react-youtube';
 
-import { RootState } from '@/features/store';
 import { PlayIcon, PauseIcon, SkipBackIcon, SkipForwardIcon } from '@/assets/icons';
 
 import { getPlayTime, getTimeStamp } from '@/utils';
+import { getVideoSelector } from '@/features/videoSlice';
 
 const Player = () => {
-  const nowVideo = useSelector((state: RootState) => state.videos.nowVideo);
+  const nowVideo = useSelector(getVideoSelector);
   const [isPlay, setIsPlay] = useState(true);
 
   const onClick = () => {
