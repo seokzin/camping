@@ -85,17 +85,8 @@ export const getSearch = createAsyncThunk('videos/getSearch', async (term: strin
     return response.data.items[0];
   };
 
-  // 기존 코드 : videosData에 Video[]가 담겨서 payload에 unknown 에러..
-  // const searchData = await getSearchInfo();
-  // const videosData = await Promise.all(
-  //   searchData.map((item: any) => getVideosInfo(item.id.videoId)),
-  // );
-
-  // return videosData.map((item) => simplifyData(item));
-
   let searchData = await getSearchInfo();
   searchData = await Promise.all(searchData.map((item: any) => getVideosInfo(item.id.videoId)));
-
   return searchData.map((item: any) => simplifyData(item));
 });
 
@@ -103,29 +94,31 @@ export const videoSlice = createSlice({
   name: 'videos',
   initialState,
   reducers: {
-    playVideo: (state, action: PayloadAction<Video>) => {
-      state.nowVideo = action.payload;
+    playVideo: (state, { payload }: PayloadAction<Video>) => {
+      state.nowVideo = payload;
     },
-    addVideo: (state, action: PayloadAction<Video>) => {
-      if (!current(state.playList).includes(action.payload)) {
-        state.playList.push(action.payload);
+    addVideo: (state, { payload }: PayloadAction<Video>) => {
+      if (!current(state.playList).includes(payload)) {
+        state.playList.push(payload);
       }
     },
-    removeVideo: (state, action: PayloadAction<Video>) => {
-      state.playList = state.playList.filter((item) => item.id !== action.payload.id);
+    removeVideo: (state, { payload }: PayloadAction<Video>) => {
+      state.playList = state.playList.filter((item) => item.id !== payload.id);
     },
-    saveKeyword: (state, action) => {
-      state.searchKeyword = action.payload;
+    saveKeyword: (state, { payload }) => {
+      state.searchKeyword = payload;
     },
   },
 
   extraReducers: (builder) => {
     builder
-      .addCase(getPopular.fulfilled, (state, action: PayloadAction<Video[]>) => {
-        state.popularList = checkData(current(state.playList), action.payload);
+      .addCase(getPopular.fulfilled, (state, { payload }: PayloadAction<Video[]>) => {
+        console.log('나', checkData(current(state.playList), payload));
+        state.popularList = checkData(current(state.playList), payload);
+        console.log('너', state.popularList);
       })
-      .addCase(getSearch.fulfilled, (state, action: PayloadAction<Video[]>) => {
-        state.searchList = checkData(current(state.playList), action.payload);
+      .addCase(getSearch.fulfilled, (state, { payload }: PayloadAction<Video[]>) => {
+        state.searchList = checkData(current(state.playList), payload);
       });
   },
 });
