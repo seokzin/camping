@@ -16,36 +16,40 @@ const Player = () => {
     setIsPlay(!isPlay);
   };
 
-  const opts = {
-    height: '0',
-    width: '0',
-    playerVars: {
-      autoplay: 1,
-    },
-  };
+  // const opts = {
+  //   height: '0',
+  //   width: '0',
+  //   playerVars: {
+  //     autoplay: 1,
+  //   },
+  // };
 
   return (
-    <Layout>
-      <Image src={nowVideo?.thumbnail} />
+    <>
+      {nowVideo && (
+        <Layout>
+          <Image src={nowVideo?.thumbnail} />
 
-      <InfoBox>
-        <Title>{nowVideo?.title}</Title>
-        <ChannelTitle>{nowVideo?.channelTitle}</ChannelTitle>
-        {nowVideo && (
-          <Duration>
-            {getTimeStamp(0)} /{getTimeStamp(nowVideo && getPlayTime(nowVideo?.duration))}
-          </Duration>
-        )}
-      </InfoBox>
+          <InfoBox>
+            <Title>{nowVideo?.title}</Title>
+            <ChannelTitle>{nowVideo?.channelTitle}</ChannelTitle>
+            {nowVideo && (
+              <Duration>
+                {getTimeStamp(0)} /{getTimeStamp(nowVideo && getPlayTime(nowVideo?.duration))}
+              </Duration>
+            )}
+          </InfoBox>
 
-      {/* <YouTube width={0} height={0} videoId={nowVideo?.id} onPlay={isPlay} onPause={isPlay} /> */}
+          {/* <YouTube width={0} height={0} videoId={nowVideo?.id} onPlay={isPlay} onPause={isPlay} /> */}
 
-      <ControllerBox>
-        <SkipBackIcon width={20} height={20} />
-        {isPlay ? <PlayIcon onClick={onClick} /> : <PauseIcon onClick={onClick} />}
-        <SkipForwardIcon width={20} height={20} />
-      </ControllerBox>
-    </Layout>
+          <ControllerBox>
+            <SkipBackIcon width={20} height={20} />
+            {isPlay ? <PlayIcon onClick={onClick} /> : <PauseIcon onClick={onClick} />}
+            <SkipForwardIcon width={20} height={20} />
+          </ControllerBox>
+        </Layout>
+      )}
+    </>
   );
 };
 
