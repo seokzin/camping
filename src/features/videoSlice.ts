@@ -8,6 +8,8 @@ interface VideoState {
   popularList: Video[];
   searchKeyword: string;
   searchList: Video[];
+  loading: boolean;
+  error: undefined | string;
 }
 
 // interface를 페이지 단에서 불러오는 방법 - export
@@ -26,6 +28,8 @@ const initialState: VideoState = {
   popularList: [],
   searchKeyword: '',
   searchList: [],
+  loading: false,
+  error: undefined,
 };
 
 const simplifyData = (rawData: any): Video => {
@@ -112,11 +116,23 @@ export const videoSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
+      .addCase(getPopular.pending, (state) => {
+        state.error = undefined;
+        state.loading = true;
+      })
+
       .addCase(getPopular.fulfilled, (state, { payload }: PayloadAction<Video[]>) => {
+        state.error = undefined;
+        state.loading = false;
         console.log('나', checkData(current(state.playList), payload));
         state.popularList = checkData(current(state.playList), payload);
         console.log('너', state.popularList);
       })
+      .addCase(getPopular.rejected, (state, { error }) => {
+        state.error = error.message;
+        state.loading = false;
+      })
+
       .addCase(getSearch.fulfilled, (state, { payload }: PayloadAction<Video[]>) => {
         state.searchList = checkData(current(state.playList), payload);
       });
