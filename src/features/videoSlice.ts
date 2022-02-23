@@ -12,7 +12,6 @@ interface VideoState {
   error: undefined | string;
 }
 
-// interface를 페이지 단에서 불러오는 방법 - export
 export interface Video {
   id: string;
   title: string;
@@ -43,13 +42,18 @@ const simplifyData = (rawData: any): Video => {
   };
 };
 
-const checkData = (myList: Video[], newList: Video[]): Video[] => {
-  return newList.map((item: Video) => {
-    for (const video of myList) {
-      if (video.id === item.id) return { ...item, bookmark: true };
+const checkIsMarked = (myList: Video[], newList: Video[]): Video[] => {
+  console.log('my', myList);
+  console.log('new', newList);
+
+  const bookmarkCheckedList = newList.map((item: Video) => {
+    if (myList.some((video) => video.id === item.id)) {
+      return { ...item, bookmark: true };
     }
     return { ...item, bookmark: false };
   });
+
+  return bookmarkCheckedList;
 };
 
 export const getPopular = createAsyncThunk('videos/getPopular', async () => {
@@ -124,7 +128,7 @@ export const videoSlice = createSlice({
       .addCase(getPopular.fulfilled, (state, { payload }: PayloadAction<Video[]>) => {
         state.error = undefined;
         state.loading = false;
-        state.popularList = checkData(current(state.playList), payload);
+        state.popularList = checkIsMarked(current(state.playList), payload);
       })
       .addCase(getPopular.rejected, (state, { error }) => {
         state.error = error.message;
@@ -132,7 +136,7 @@ export const videoSlice = createSlice({
       })
 
       .addCase(getSearch.fulfilled, (state, { payload }: PayloadAction<Video[]>) => {
-        state.searchList = checkData(current(state.playList), payload);
+        state.searchList = checkIsMarked(current(state.playList), payload);
       });
   },
 });
