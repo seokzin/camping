@@ -4,31 +4,23 @@ import styled from 'styled-components';
 import { Card, Spinner } from '@/components/';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '@/features/store.hooks';
-import { getPopular, Video, getPlayListSelector } from '@/features/videoSlice';
+import { getPopular, getPopularListSelector } from '@/features/videoSlice';
 
 const Home = () => {
-  const playList = useSelector(getPlayListSelector);
+  const popularList = useSelector(getPopularListSelector);
   const dispatch = useAppDispatch();
 
-  const [data, setData] = useState<Video[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  const fetchData = async () => {
-    setLoading(true);
-    const response = await dispatch(getPopular());
-    setData(response.payload);
-    setLoading(false);
-  };
-
   useEffect(() => {
-    fetchData();
-  }, [dispatch]);
+    dispatch(getPopular());
+  }, []);
 
   return (
     <>
       <Title>인기 동영상</Title>
 
-      {loading ? <Spinner /> : data?.map((item, index) => <Card data={item} key={index} />)}
+      {popularList?.map((item, index) => (
+        <Card data={item} key={index} />
+      ))}
     </>
   );
 };
