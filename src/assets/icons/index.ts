@@ -10,3 +10,4 @@ export { ReactComponent as RewindIcon } from './rewind.svg';
 export { ReactComponent as SkipBackIcon } from './skip-back.svg';
 export { ReactComponent as SkipForwardIcon } from './skip-forward.svg';
 export { ReactComponent as BookmarkIcon } from './bookmark.svg';
+export { ReactComponent as XIcon } from './x.svg';
