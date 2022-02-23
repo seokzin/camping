@@ -102,7 +102,7 @@ export const videoSlice = createSlice({
       state.nowVideo = payload;
     },
     addVideo: (state, { payload }: PayloadAction<Video>) => {
-      if (!current(state.playList).includes(payload)) {
+      if (!current(state.playList).some((video) => video.id === payload.id)) {
         state.playList.push(payload);
       }
     },
@@ -124,9 +124,7 @@ export const videoSlice = createSlice({
       .addCase(getPopular.fulfilled, (state, { payload }: PayloadAction<Video[]>) => {
         state.error = undefined;
         state.loading = false;
-        console.log('나', checkData(current(state.playList), payload));
         state.popularList = checkData(current(state.playList), payload);
-        console.log('너', state.popularList);
       })
       .addCase(getPopular.rejected, (state, { error }) => {
         state.error = error.message;
