@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { useDispatch } from 'react-redux';
 
 import { playVideo, addVideo, removeVideo, Video } from '@/features/videoSlice';
 import { getPlayTime, getTimeStamp } from '@/utils';
 import { PlayIcon, XIcon, BookmarkIcon } from '@/assets/icons';
 
-interface IBookmarkButton {
-  onClick: () => void;
-  isAdded: boolean;
+interface ImageProps {
+  isPlaying: boolean;
+}
+
+interface PlayIconBoxProps {
+  isPlaying: boolean;
 }
 
 // props를 인터페이스로 분리해야만 부모에서 자식에게 props 전달할 때 에러 발생 X
@@ -18,33 +21,27 @@ interface Props {
 }
 
 const PlayListCard = ({ video }: Props) => {
-  const [isAdded, setIsAdded] = useState(video.bookmark);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const dispatch = useDispatch();
 
   // store depandency가 존재 -> Card의 로직이 딥한 부분 + store 로직이 섞여서 재활용성 낮음
-  const handleAddVideo = () => {
-    if (isAdded) {
-      dispatch(removeVideo({ ...video, bookmark: false }));
-      setIsAdded(false);
-    }
-    if (!isAdded) {
-      dispatch(addVideo({ ...video, bookmark: true }));
-      setIsAdded(true);
-    }
+  const handleRemoveVideo = () => {
+    dispatch(removeVideo({ ...video, bookmark: false }));
   };
 
   const handlePlayVideo = () => {
     dispatch(playVideo(video));
+    setIsPlaying(true);
   };
 
   return (
-    <Layout>
+    <Layout onClick={handlePlayVideo}>
       <ImageBox>
-        <PlayButton>
+        <PlayIconBox isPlaying={isPlaying}>
           <PlayIcon />
-        </PlayButton>
-        <Image src={video.thumbnail}></Image>
+        </PlayIconBox>
+        <Image src={video.thumbnail} isPlaying={isPlaying}></Image>
       </ImageBox>
 
       <InfoBox>
@@ -52,7 +49,7 @@ const PlayListCard = ({ video }: Props) => {
           <Title>{video.title}</Title>
           <ChannelTitle>{video.channelTitle}</ChannelTitle>
         </Info>
-        <DeleteButton>
+        <DeleteButton onClick={handleRemoveVideo}>
           <XIcon />
         </DeleteButton>
       </InfoBox>
@@ -63,6 +60,7 @@ const PlayListCard = ({ video }: Props) => {
 const Layout = styled.div`
   display: flex;
   padding: 0.3rem 0;
+  cursor: pointer;
 `;
 
 const ImageBox = styled.div`
@@ -71,14 +69,20 @@ const ImageBox = styled.div`
   align-items: center;
 `;
 
-const Image = styled.img`
+const Image = styled.img<ImageProps>`
   width: 4rem;
   height: 3rem;
   object-fit: cover;
   border-radius: 0.25rem;
+
+  ${(props) =>
+    props.isPlaying &&
+    css`
+      filter: opacity(25%);
+    `}
 `;
 
-const PlayButton = styled.button`
+const PlayIconBox = styled.button<PlayIconBoxProps>`
   position: absolute;
   top: 1.5rem;
   left: 2rem;
@@ -90,12 +94,18 @@ const PlayButton = styled.button`
   svg {
     fill: ${({ theme }) => theme.mode.mainText};
   }
+
+  ${(props) =>
+    !props.isPlaying &&
+    css`
+      visibility: hidden;
+    `}
 `;
 
 const DeleteButton = styled.button`
   background-color: transparent;
   border: none;
-
+  margin-left: 0.5rem;
   svg {
     fill: ${({ theme }) => theme.mode.mainText};
   }
@@ -113,7 +123,7 @@ const InfoBox = styled.div`
 const Info = styled.div``;
 
 const Title = styled.h2`
-  font-size: ${({ theme }) => theme.fontSize.md};
+  font-size: ${({ theme }) => theme.fontSize.sm};
   color: ${({ theme }) => theme.mode.mainText};
 
   overflow: hidden;
@@ -125,7 +135,7 @@ const Title = styled.h2`
 const ChannelTitle = styled.h3`
   margin-top: 0.2rem;
 
-  font-size: ${({ theme }) => theme.fontSize.sm};
+  font-size: ${({ theme }) => theme.fontSize.xs};
   color: ${({ theme }) => theme.mode.subText};
 `;
 
