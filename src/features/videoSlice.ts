@@ -43,9 +43,6 @@ const simplifyData = (rawData: any): Video => {
 };
 
 const checkIsMarked = (myList: Video[], newList: Video[]): Video[] => {
-  console.log('my', myList);
-  console.log('new', newList);
-
   const bookmarkCheckedList = newList.map((item: Video) => {
     if (myList.some((video) => video.id === item.id)) {
       return { ...item, bookmark: true };
@@ -142,6 +139,7 @@ export const videoSlice = createSlice({
 });
 
 export const { playVideo, addVideo, removeVideo, saveKeyword } = videoSlice.actions;
+export const getPopularListSelector = (state: RootState) => state.videos.popularList;
 export const getPlayListSelector = (state: RootState) => state.videos.playList;
 export const getSearchListSelector = (state: RootState) => state.videos.searchList;
 export const getTermSelector = (state: RootState) => state.videos.searchKeyword;
