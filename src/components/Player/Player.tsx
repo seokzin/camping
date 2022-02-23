@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { useSelector } from 'react-redux';
 import YouTube from 'react-youtube';
 
 import { PlayIcon, PauseIcon, SkipBackIcon, SkipForwardIcon } from '@/assets/icons';
 
 import { getPlayTime, getTimeStamp } from '@/utils';
-import { getVideoSelector } from '@/features/videoSlice';
+import { getStatusSelector, getVideoSelector } from '@/features/videoSlice';
+
+interface LayoutProps {
+  status: boolean;
+}
 
 const Player = () => {
   const nowVideo = useSelector(getVideoSelector);
+  const status = useSelector(getStatusSelector);
   const [isPlay, setIsPlay] = useState(true);
 
   const onClick = () => {
@@ -25,35 +30,31 @@ const Player = () => {
   // };
 
   return (
-    <>
-      {nowVideo && (
-        <Layout>
-          <Image src={nowVideo?.thumbnail} />
+    <Layout status={status}>
+      <Image src={nowVideo?.thumbnail} />
 
-          <InfoBox>
-            <Title>{nowVideo?.title}</Title>
-            <ChannelTitle>{nowVideo?.channelTitle}</ChannelTitle>
-            {nowVideo && (
-              <Duration>
-                {getTimeStamp(0)} /{getTimeStamp(nowVideo && getPlayTime(nowVideo?.duration))}
-              </Duration>
-            )}
-          </InfoBox>
+      <InfoBox>
+        <Title>{nowVideo?.title}</Title>
+        <ChannelTitle>{nowVideo?.channelTitle}</ChannelTitle>
+        {nowVideo && (
+          <Duration>
+            {getTimeStamp(0)} /{getTimeStamp(nowVideo && getPlayTime(nowVideo?.duration))}
+          </Duration>
+        )}
+      </InfoBox>
 
-          {/* <YouTube width={0} height={0} videoId={nowVideo?.id} onPlay={isPlay} onPause={isPlay} /> */}
+      {/* <YouTube width={0} height={0} videoId={nowVideo?.id} onPlay={isPlay} onPause={isPlay} /> */}
 
-          <ControllerBox>
-            <SkipBackIcon width={20} height={20} />
-            {isPlay ? <PlayIcon onClick={onClick} /> : <PauseIcon onClick={onClick} />}
-            <SkipForwardIcon width={20} height={20} />
-          </ControllerBox>
-        </Layout>
-      )}
-    </>
+      <ControllerBox>
+        <SkipBackIcon width={20} height={20} />
+        {isPlay ? <PlayIcon onClick={onClick} /> : <PauseIcon onClick={onClick} />}
+        <SkipForwardIcon width={20} height={20} />
+      </ControllerBox>
+    </Layout>
   );
 };
 
-const Layout = styled.div`
+const Layout = styled.div<LayoutProps>`
   box-sizing: border-box;
   padding: 0 1rem;
 
@@ -66,6 +67,12 @@ const Layout = styled.div`
 
   width: 100%;
   height: 4rem;
+
+  ${(props) =>
+    !props.status &&
+    css`
+      visibility: hidden;
+    `}
 
   background-color: ${({ theme }) => theme.mode.mainColor};
   border-top: 1px solid ${({ theme }) => theme.mode.subColor};

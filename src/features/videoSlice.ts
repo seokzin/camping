@@ -4,6 +4,7 @@ import { RootState } from '@/features/store';
 
 interface VideoState {
   nowVideo: Video | undefined;
+  status: boolean; // player 현재 재생곡 여부
   playList: Video[];
   popularList: Video[];
   searchKeyword: string;
@@ -23,6 +24,7 @@ export interface Video {
 
 const initialState: VideoState = {
   nowVideo: undefined,
+  status: false,
   playList: [],
   popularList: [],
   searchKeyword: '',
@@ -101,6 +103,7 @@ export const videoSlice = createSlice({
   reducers: {
     playVideo: (state, { payload }: PayloadAction<Video>) => {
       state.nowVideo = payload;
+      state.status = true;
     },
     addVideo: (state, { payload }: PayloadAction<Video>) => {
       if (!current(state.playList).some((video) => video.id === payload.id)) {
@@ -144,4 +147,5 @@ export const getPlayListSelector = (state: RootState) => state.videos.playList;
 export const getSearchListSelector = (state: RootState) => state.videos.searchList;
 export const getTermSelector = (state: RootState) => state.videos.searchKeyword;
 export const getVideoSelector = (state: RootState) => state.videos.nowVideo;
+export const getStatusSelector = (state: RootState) => state.videos.status;
 export default videoSlice.reducer;
