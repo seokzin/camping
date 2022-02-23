@@ -10,18 +10,9 @@ export interface Video {
 export interface YoutubeResponse {
   kind: string;
   etag: string;
-  regionCode?: string;
-  nextPageToken: string;
-  pageInfo: PageInfo;
-  items: Item[];
-}
-
-interface Item {
-  kind: string;
-  etag: string;
   id: SearchResponseId | string;
   snippet: Snippet;
-  ContentDetails: ContentDetails;
+  contentDetails: ContentDetails;
 }
 
 interface SearchResponseId {
@@ -79,9 +70,4 @@ interface RegionRestriction {
 
 interface ContentRating {
   [key: string]: string;
-}
-
-interface PageInfo {
-  totalResults: number;
-  resultsPerPage: number;
 }
