@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-
-import { playVideo, addVideo, removeVideo, Video } from '@/features/videoSlice';
+import type { Video } from '@/features/store.types';
 import { getPlayTime, getTimeStamp } from '@/utils';
 import { PlayIcon, BookmarkIcon } from '@/assets/icons';
+import { addVideo, removeVideo } from '@/features/playListSlice';
+import { playVideo } from '@/features/playingVideoSlice';
 
-interface IBookmarkButton {
+interface BookmarkButtonProps {
   onClick: () => void;
   isAdded: boolean;
 }
@@ -14,30 +15,28 @@ interface IBookmarkButton {
 // props를 인터페이스로 분리해야만 부모에서 자식에게 props 전달할 때 에러 발생 X
 // 에러: is not assignable to type 'IntrinsicAttributes
 interface Props {
-  data: Video;
+  video: Video;
 }
 
-const Card = ({ data }: Props) => {
-  console.log(data);
-
-  const [isAdded, setIsAdded] = useState(data.bookmark);
+const Card = ({ video }: Props) => {
+  const [isAdded, setIsAdded] = useState(video.bookmark);
 
   const dispatch = useDispatch();
 
   // store depandency가 존재 -> Card의 로직이 딥한 부분 + store 로직이 섞여서 재활용성 낮음
   const handleAddVideo = () => {
     if (isAdded) {
-      dispatch(removeVideo({ ...data, bookmark: false }));
+      dispatch(removeVideo({ ...video, bookmark: false }));
       setIsAdded(false);
     }
     if (!isAdded) {
-      dispatch(addVideo({ ...data, bookmark: true }));
+      dispatch(addVideo({ ...video, bookmark: true }));
       setIsAdded(true);
     }
   };
 
   const handlePlayVideo = () => {
-    dispatch(playVideo(data));
+    dispatch(playVideo(video));
   };
 
   return (
@@ -50,11 +49,11 @@ const Card = ({ data }: Props) => {
         <BookmarkButton onClick={handleAddVideo} isAdded={isAdded}>
           <BookmarkIcon />
         </BookmarkButton>
-        <Image src={data.thumbnail}></Image>
-        {data.duration && <Duration>{getTimeStamp(getPlayTime(data.duration))}</Duration>}
+        <Image src={video.thumbnail}></Image>
+        {video.duration && <Duration>{getTimeStamp(getPlayTime(video.duration))}</Duration>}
       </ImageBox>
-      <Title>{data.title}</Title>
-      <ChannelTitle>{data.channelTitle}</ChannelTitle>
+      <Title>{video.title}</Title>
+      <ChannelTitle>{video.channelTitle}</ChannelTitle>
     </Layout>
   );
 };
@@ -101,7 +100,7 @@ const PlayButton = styled.button`
   }
 `;
 
-const BookmarkButton = styled.button<IBookmarkButton>`
+const BookmarkButton = styled.button<BookmarkButtonProps>`
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;

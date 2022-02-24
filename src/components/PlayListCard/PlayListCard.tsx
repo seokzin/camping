@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { useDispatch } from 'react-redux';
+import { Video } from '@/features/store.types';
 
-import { playVideo, addVideo, removeVideo, Video } from '@/features/videoSlice';
 import { getPlayTime, getTimeStamp } from '@/utils';
 import { PlayIcon, XIcon, BookmarkIcon } from '@/assets/icons';
+import { removeVideo } from '@/features/playListSlice';
+import { playVideo } from '@/features/playingVideoSlice';
 
 interface ImageProps {
   isPlaying: boolean;

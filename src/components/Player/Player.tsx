@@ -6,19 +6,22 @@ import YouTube from 'react-youtube';
 import { PlayIcon, PauseIcon, SkipBackIcon, SkipForwardIcon } from '@/assets/icons';
 
 import { getPlayTime, getTimeStamp } from '@/utils';
-import { getStatusSelector, getVideoSelector } from '@/features/videoSlice';
+import { selectPlayingVideo } from '@/features/playingVideoSlice';
+import { useAppDispatch } from '@/features/store.hooks';
+import { playVideo, stopVideo } from '@/features/playingVideoSlice';
 
 interface LayoutProps {
-  status: boolean;
+  status: 'play' | 'stop';
 }
 
 const Player = () => {
-  const nowVideo = useSelector(getVideoSelector);
-  const status = useSelector(getStatusSelector);
-  const [isPlay, setIsPlay] = useState(true);
+  const { playingVideo, status } = useSelector(selectPlayingVideo);
+  const dispatch = useAppDispatch();
 
   const onClick = () => {
-    setIsPlay(!isPlay);
+    if (playingVideo) {
+      status === 'play' ? dispatch(stopVideo(playingVideo)) : dispatch(playVideo(playingVideo));
+    }
   };
 
   // const opts = {
@@ -31,23 +34,23 @@ const Player = () => {
 
   return (
     <Layout status={status}>
-      <Image src={nowVideo?.thumbnail} />
+      <Image src={playingVideo?.thumbnail} />
 
       <InfoBox>
-        <Title>{nowVideo?.title}</Title>
-        <ChannelTitle>{nowVideo?.channelTitle}</ChannelTitle>
-        {nowVideo && (
+        <Title>{playingVideo?.title}</Title>
+        <ChannelTitle>{playingVideo?.channelTitle}</ChannelTitle>
+        {playingVideo && (
           <Duration>
-            {getTimeStamp(0)} /{getTimeStamp(nowVideo && getPlayTime(nowVideo?.duration))}
+            {getTimeStamp(0)} /{getTimeStamp(playingVideo && getPlayTime(playingVideo?.duration))}
           </Duration>
         )}
       </InfoBox>
 
-      {/* <YouTube width={0} height={0} videoId={nowVideo?.id} onPlay={isPlay} onPause={isPlay} /> */}
+      {/* <YouTube width={0} height={0} videoId={playingVideo?.id} onPlay={isPlay} onPause={isPlay} /> */}
 
       <ControllerBox>
         <SkipBackIcon width={20} height={20} />
-        {isPlay ? <PlayIcon onClick={onClick} /> : <PauseIcon onClick={onClick} />}
+        {status === 'play' ? <PlayIcon onClick={onClick} /> : <PauseIcon onClick={onClick} />}
         <SkipForwardIcon width={20} height={20} />
       </ControllerBox>
     </Layout>
