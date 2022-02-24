@@ -4,12 +4,12 @@ import { Video } from './store.types';
 
 interface playingVideoState {
   playingVideo: Video | undefined;
-  isPlaying: boolean;
+  status: 'play' | 'stop';
 }
 
 const initialState: playingVideoState = {
   playingVideo: undefined,
-  isPlaying: false,
+  status: 'stop',
 };
 
 export const playingVideoSlice = createSlice({
@@ -18,11 +18,11 @@ export const playingVideoSlice = createSlice({
   reducers: {
     playVideo: (state, { payload }: PayloadAction<Video>) => {
       state.playingVideo = payload;
-      state.isPlaying = true;
+      state.status = 'play';
     },
-    stopVideo: (state) => {
-      state.playingVideo = undefined;
-      state.isPlaying = false;
+    stopVideo: (state, { payload }) => {
+      state.playingVideo = payload;
+      state.status = 'stop';
     },
   },
 });

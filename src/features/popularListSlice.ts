@@ -15,7 +15,7 @@ const initialState: popularListState = {
   error: undefined,
 };
 
-export const getPopular = createAsyncThunk('videos/getPopular', async () => {
+export const getPopularList = createAsyncThunk('videos/getPopularList', async () => {
   const response = await youtube.get('/videos', {
     params: {
       part: 'snippet, contentDetails',
@@ -44,14 +44,14 @@ export const popularListSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getPopular.pending, (state) => {
+      .addCase(getPopularList.pending, (state) => {
         state.loading = 'pending';
       })
-      .addCase(getPopular.fulfilled, (state, { payload }: PayloadAction<Video[]>) => {
+      .addCase(getPopularList.fulfilled, (state, { payload }: PayloadAction<Video[]>) => {
         state.loading = 'idle';
         state.popularList = payload;
       })
-      .addCase(getPopular.rejected, (state, { error }) => {
+      .addCase(getPopularList.rejected, (state, { error }) => {
         state.loading = 'idle';
         state.error = error.message;
       });
