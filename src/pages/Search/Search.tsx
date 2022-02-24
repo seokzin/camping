@@ -5,17 +5,12 @@ import { Card } from '@/components/';
 import { SearchIcon } from '@/assets/icons';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '@/features/store.hooks';
-import {
-  getSearch,
-  saveKeyword,
-  getSearchListSelector,
-  getTermSelector,
-} from '@/features/videoSlice';
+import { getSearchList, saveKeyword, selectSearchList } from '@/features/searchListSlice';
 
 const Search = () => {
-  const searchList = useSelector(getSearchListSelector);
-  const term = useSelector(getTermSelector);
+  const { searchList, searchKeyword, loading, error } = useSelector(selectSearchList);
 
+  console.log('나', searchList);
   const dispatch = useAppDispatch();
 
   // TODO: loading 로직 redux로 옮기기
@@ -25,8 +20,8 @@ const Search = () => {
 
   // FIXME: 어떤 event type도 e.key를 해결하지 못했음
   const onSubmit = async (e: React.MouseEvent | any) => {
-    if (term && (e.type === 'click' || e.key === 'Enter')) {
-      dispatch(getSearch(term));
+    if (searchKeyword && (e.type === 'click' || e.key === 'Enter')) {
+      dispatch(getSearchList(searchKeyword));
     }
   };
 
@@ -36,14 +31,14 @@ const Search = () => {
         <SearchInput
           onChange={onChange}
           onKeyPress={onSubmit}
-          value={term}
+          value={searchKeyword}
           placeholder='검색어를 입력해주세요.'
         />
         <SearchIcon width={26} height={26} onClick={onSubmit} />
       </Layout>
 
-      {searchList?.map((item, index) => (
-        <Card data={item} key={index} />
+      {searchList?.map((video, index) => (
+        <Card video={video} key={index} />
       ))}
     </>
   );

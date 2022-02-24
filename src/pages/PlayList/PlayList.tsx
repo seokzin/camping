@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { Card, Spinner } from '@/components';
+import { PlayListCard } from '@/components';
 import styled from 'styled-components';
-import { getPlayListSelector } from '@/features/videoSlice';
+import { selectPlayList } from '@/features/playListSlice';
 
 const PlayList = () => {
-  const playList = useSelector(getPlayListSelector);
+  const { playList } = useSelector(selectPlayList);
 
   return (
     <>
       <Title>Playlist</Title>
 
-      {playList?.map((item, index) => (
-        <Card data={item} key={index} />
+      {playList.map((video, index) => (
+        <PlayListCard video={video} key={index} />
       ))}
     </>
   );
