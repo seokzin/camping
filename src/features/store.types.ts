@@ -10,7 +10,7 @@ export interface Video {
 export interface YoutubeResponse {
   kind: string;
   etag: string;
-  id: SearchResponseId | string;
+  id: SearchResponseId;
   snippet: Snippet;
   contentDetails: ContentDetails;
 }
