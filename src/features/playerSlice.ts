@@ -2,18 +2,18 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '@/app/rootReducer';
 import { Video } from './store.types';
 
-interface playingVideoState {
+interface playerState {
   playingVideo: Video | undefined;
   status: 'play' | 'stop';
 }
 
-const initialState: playingVideoState = {
+const initialState: playerState = {
   playingVideo: undefined,
   status: 'stop',
 };
 
-export const playingVideoSlice = createSlice({
-  name: 'playingVideo',
+export const playerSlice = createSlice({
+  name: 'player',
   initialState,
   reducers: {
     playVideo: (state, { payload }: PayloadAction<Video>) => {
@@ -27,6 +27,6 @@ export const playingVideoSlice = createSlice({
   },
 });
 
-export const { playVideo, stopVideo } = playingVideoSlice.actions;
-export const selectPlayingVideo = (state: RootState) => state.playingVideo;
-export default playingVideoSlice.reducer;
+export const { playVideo, stopVideo } = playerSlice.actions;
+export const selectPlayer = (state: RootState) => state.player;
+export default playerSlice.reducer;

@@ -5,7 +5,7 @@ import type { Video } from '@/features/store.types';
 import { getPlayTime, getTimeStamp } from '@/utils';
 import { PlayIcon, BookmarkIcon } from '@/assets/icons';
 import { addVideo, removeVideo } from '@/features/playListSlice';
-import { playVideo } from '@/features/playingVideoSlice';
+import { playVideo } from '@/features/playerSlice';
 
 interface BookmarkButtonProps {
   onClick: () => void;

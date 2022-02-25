@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { useSelector } from 'react-redux';
 import YouTube from 'react-youtube';
@@ -6,16 +5,15 @@ import YouTube from 'react-youtube';
 import { PlayIcon, PauseIcon, SkipBackIcon, SkipForwardIcon } from '@/assets/icons';
 
 import { getPlayTime, getTimeStamp } from '@/utils';
-import { selectPlayingVideo } from '@/features/playingVideoSlice';
 import { useAppDispatch } from '@/features/store.hooks';
-import { playVideo, stopVideo } from '@/features/playingVideoSlice';
+import { selectPlayer, playVideo, stopVideo } from '@/features/playerSlice';
 
 interface LayoutProps {
   status: 'play' | 'stop';
 }
 
 const Player = () => {
-  const { playingVideo, status } = useSelector(selectPlayingVideo);
+  const { playingVideo, status } = useSelector(selectPlayer);
   const dispatch = useAppDispatch();
 
   const onClick = () => {
