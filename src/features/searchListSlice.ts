@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import type { RootState } from '@/app/rootReducer';
-import { Video, YoutubeResponse } from './store.types';
 import youtube from '@/services/youtube';
+import type { RootState } from '@/app/rootReducer';
+import type { Video, YoutubeResponse } from './store.types';
 
 interface searchListState {
   searchList: Video[];
@@ -37,9 +37,8 @@ export const getSearchList = createAsyncThunk('videos/getSearchList', async (ter
 
     const videoData: YoutubeResponse = response.data.items[0];
 
-    // TODO: ID 관련 이슈로 추정
     return {
-      id: videoData.id.videoId,
+      id: videoData.id,
       title: videoData.snippet.title,
       channelTitle: videoData.snippet.channelTitle,
       thumbnail: videoData.snippet.thumbnails.medium.url,
@@ -49,28 +48,6 @@ export const getSearchList = createAsyncThunk('videos/getSearchList', async (ter
   });
 
   return Promise.all(PromiseArrayResult);
-  // return PromiseArrayResult;
-  // return await Promise.all(
-  //   response.data.items.map((item: YoutubeResponse) => {
-  //     return youtube
-  //       .get('/videos', {
-  //         params: {
-  //           part: 'snippet, contentDetails',
-  //           id: item.id.videoId,
-  //         },
-  //       })
-  //       .then((item) => {
-  //         return {
-  //           id: item.data.items[0].id,
-  //           title: item.data.items[0].snippet.title,
-  //           channelTitle: item.data.items[0].snippet.channelTitle,
-  //           thumbnail: item.data.items[0].snippet.thumbnails.medium.url,
-  //           duration: item.data.items[0].contentDetails.duration,
-  //           bookmark: false,
-  //         };
-  //       });
-  //   }),
-  // );
 });
 
 export const searchListSlice = createSlice({
@@ -89,6 +66,7 @@ export const searchListSlice = createSlice({
 
       .addCase(getSearchList.fulfilled, (state, { payload }: PayloadAction<Video[]>) => {
         state.loading = 'idle';
+        console.log('나', payload);
         state.searchList = payload;
       })
       .addCase(getSearchList.rejected, (state, { error }) => {
