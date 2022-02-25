@@ -14,7 +14,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getPopularList());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
