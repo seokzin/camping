@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Card } from '@/components/';
+import { Card, Spinner } from '@/components/';
 import { SearchIcon } from '@/assets/icons';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '@/features/store.hooks';
@@ -13,7 +13,6 @@ const Search = () => {
   const dispatch = useAppDispatch();
   const markedSearchList = useBookmarkChecker(searchList);
 
-  // TODO: loading 로직 redux로 옮기기
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(saveKeyword(e.target.value));
   };
@@ -37,9 +36,13 @@ const Search = () => {
         <SearchIcon width={26} height={26} onClick={onSubmit} />
       </Layout>
 
-      {markedSearchList?.map((video, index) => (
-        <Card video={video} key={index} />
-      ))}
+      {loading === 'pending' ? (
+        <Spinner />
+      ) : error ? (
+        <Error>{error}</Error>
+      ) : (
+        markedSearchList?.map((video, index) => <Card video={video} key={index} />)
+      )}
     </>
   );
 };
@@ -54,6 +57,8 @@ const Layout = styled.div`
 
   border-bottom: 1px solid gray;
 `;
+
+const Error = styled.p``;
 
 const SearchInput = styled.input`
   width: 100%;
