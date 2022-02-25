@@ -3,15 +3,14 @@ import styled from 'styled-components';
 
 import { Card, Spinner } from '@/components/';
 import { useSelector } from 'react-redux';
+import { useBookmarkChecker } from '@/hooks/useBookmarkChecker';
 import { useAppDispatch } from '@/features/store.hooks';
 import { getPopularList, selectPopularList } from '@/features/popularListSlice';
 
 const Home = () => {
   const { popularList, loading, error } = useSelector(selectPopularList);
-
-  console.log(popularList);
-
   const dispatch = useAppDispatch();
+  const markedPopularList = useBookmarkChecker(popularList);
 
   useEffect(() => {
     dispatch(getPopularList());
@@ -26,7 +25,7 @@ const Home = () => {
       ) : error ? (
         <Error>{error}</Error>
       ) : (
-        popularList.map((video, index) => <Card video={video} key={index} />)
+        markedPopularList.map((video, index) => <Card video={video} key={index} />)
       )}
     </>
   );

@@ -6,12 +6,12 @@ import { SearchIcon } from '@/assets/icons';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '@/features/store.hooks';
 import { getSearchList, saveKeyword, selectSearchList } from '@/features/searchListSlice';
+import { useBookmarkChecker } from '@/hooks/useBookmarkChecker';
 
 const Search = () => {
   const { searchList, searchKeyword, loading, error } = useSelector(selectSearchList);
-
-  console.log('나', searchList);
   const dispatch = useAppDispatch();
+  const markedSearchList = useBookmarkChecker(searchList);
 
   // TODO: loading 로직 redux로 옮기기
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,7 +37,7 @@ const Search = () => {
         <SearchIcon width={26} height={26} onClick={onSubmit} />
       </Layout>
 
-      {searchList?.map((video, index) => (
+      {markedSearchList?.map((video, index) => (
         <Card video={video} key={index} />
       ))}
     </>
