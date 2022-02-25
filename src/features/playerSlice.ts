@@ -16,17 +16,22 @@ export const playerSlice = createSlice({
   name: 'player',
   initialState,
   reducers: {
-    playVideo: (state, { payload }: PayloadAction<Video>) => {
+    setVideo: (state, { payload }: PayloadAction<Video>) => {
+      console.log('set', payload);
       state.playingVideo = payload;
+      state.status = 'stop';
+    },
+    playVideo: (state, { payload }: PayloadAction<Video>) => {
+      console.log('play', payload);
       state.status = 'play';
     },
     stopVideo: (state, { payload }) => {
-      state.playingVideo = payload;
+      console.log('stop', payload);
       state.status = 'stop';
     },
   },
 });
 
-export const { playVideo, stopVideo } = playerSlice.actions;
+export const { setVideo, playVideo, stopVideo } = playerSlice.actions;
 export const selectPlayer = (state: RootState) => state.player;
 export default playerSlice.reducer;

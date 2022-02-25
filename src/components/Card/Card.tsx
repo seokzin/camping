@@ -5,7 +5,7 @@ import type { Video } from '@/features/store.types';
 import { getPlayTime, getTimeStamp } from '@/utils';
 import { PlayIcon, BookmarkIcon } from '@/assets/icons';
 import { addVideo, removeVideo } from '@/features/playListSlice';
-import { playVideo } from '@/features/playerSlice';
+import { setVideo } from '@/features/playerSlice';
 
 interface BookmarkButtonProps {
   onClick: () => void;
@@ -36,7 +36,7 @@ const Card = ({ video }: Props) => {
   };
 
   const handlePlayVideo = () => {
-    dispatch(playVideo(video));
+    dispatch(setVideo(video));
   };
 
   return (

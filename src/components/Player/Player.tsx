@@ -6,29 +6,42 @@ import { PlayIcon, PauseIcon, SkipBackIcon, SkipForwardIcon } from '@/assets/ico
 
 import { getPlayTime, getTimeStamp } from '@/utils';
 import { useAppDispatch } from '@/features/store.hooks';
-import { selectPlayer, playVideo, stopVideo } from '@/features/playerSlice';
+import { selectPlayer, setVideo, playVideo, stopVideo } from '@/features/playerSlice';
+import { useState } from 'react';
 
 interface LayoutProps {
   status: 'play' | 'stop';
 }
 
 const Player = () => {
+  const [player, setPlayer] = useState<any>(undefined);
   const { playingVideo, status } = useSelector(selectPlayer);
   const dispatch = useAppDispatch();
 
-  const onClick = () => {
+  // const onClick = () => {
+  //   if (playingVideo) {
+  //     status === 'play' ? dispatch(stopVideo(playingVideo)) : dispatch(playVideo(playingVideo));
+  //   }
+  // };
+
+  const onReady = (e: any) => {
+    setPlayer(e.target);
+    console.log(player);
+  };
+
+  const onPlay = () => {
     if (playingVideo) {
-      status === 'play' ? dispatch(stopVideo(playingVideo)) : dispatch(playVideo(playingVideo));
+      player.pauseVideo();
+      dispatch(playVideo(playingVideo));
     }
   };
 
-  // const opts = {
-  //   height: '0',
-  //   width: '0',
-  //   playerVars: {
-  //     autoplay: 1,
-  //   },
-  // };
+  const onPause = () => {
+    if (playingVideo) {
+      player.pauseVideo();
+      dispatch(stopVideo(playingVideo));
+    }
+  };
 
   return (
     <Layout status={status}>
@@ -44,11 +57,11 @@ const Player = () => {
         )}
       </InfoBox>
 
-      {/* <YouTube width={0} height={0} videoId={playingVideo?.id} onPlay={isPlay} onPause={isPlay} /> */}
+      <YouTube videoId={playingVideo?.id} onReady={onReady} onPlay={onPlay} onPause={onPause} />
 
       <ControllerBox>
         <SkipBackIcon width={20} height={20} />
-        {status === 'play' ? <PlayIcon onClick={onClick} /> : <PauseIcon onClick={onClick} />}
+        {status === 'play' ? <PlayIcon onClick={onPlay} /> : <PauseIcon onClick={onPause} />}
         <SkipForwardIcon width={20} height={20} />
       </ControllerBox>
     </Layout>
@@ -83,9 +96,10 @@ const Layout = styled.div<LayoutProps>`
     fill: ${({ theme }) => theme.mode.mainText};
   }
 
+  // Youtube
   iframe {
-    width: 1rem;
-    height: 1rem;
+    width: 2rem;
+    height: 2rem;
   }
 `;
 

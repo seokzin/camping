@@ -5,7 +5,7 @@ import { Video } from '@/features/store.types';
 
 import { PlayIcon, XIcon } from '@/assets/icons';
 import { removeVideo } from '@/features/playListSlice';
-import { playVideo } from '@/features/playerSlice';
+import { setVideo } from '@/features/playerSlice';
 
 interface ImageProps {
   isPlaying: boolean;
@@ -32,7 +32,7 @@ const PlayListCard = ({ video }: Props) => {
   };
 
   const handlePlayVideo = () => {
-    dispatch(playVideo(video));
+    dispatch(setVideo(video));
     setIsPlaying(true);
   };
 
