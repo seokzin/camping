@@ -1,9 +1,8 @@
-import { useSelector } from 'react-redux';
-import { selectPlayList } from '@/features/playListSlice';
 import type { Video } from '@/features/store.types';
+import { useAppSelector } from '@/app/store';
 
 export const useBookmarkChecker = (list: Video[]) => {
-  const { playList } = useSelector(selectPlayList);
+  const { playList } = useAppSelector((state) => state.playList);
 
   const test = list.map((item: Video) => {
     if (playList.some((video) => video.id === item.id)) {

@@ -1,15 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { useAppSelector, useAppDispatch } from '@/app/store';
 import { Card, Spinner } from '@/components/';
 import { SearchIcon } from '@/assets/icons';
-import { useSelector } from 'react-redux';
-import { useAppDispatch } from '@/features/store.hooks';
-import { getSearchList, saveKeyword, selectSearchList } from '@/features/searchListSlice';
+import { getSearchList, saveKeyword } from '@/features/searchListSlice';
 import { useBookmarkChecker } from '@/hooks/useBookmarkChecker';
 
 const Search = () => {
-  const { searchList, searchKeyword, loading, error } = useSelector(selectSearchList);
+  const { searchList, searchKeyword, loading, error } = useAppSelector((state) => state.searchList);
   const dispatch = useAppDispatch();
   const markedSearchList = useBookmarkChecker(searchList);
 

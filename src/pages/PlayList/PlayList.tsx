@@ -1,11 +1,10 @@
-import { useSelector } from 'react-redux';
+import styled from 'styled-components';
 
 import { PlayListCard } from '@/components';
-import styled from 'styled-components';
-import { selectPlayList } from '@/features/playListSlice';
+import { useAppSelector } from '@/app/store';
 
 const PlayList = () => {
-  const { playList } = useSelector(selectPlayList);
+  const { playList } = useAppSelector((state) => state.playList);
 
   return (
     <>

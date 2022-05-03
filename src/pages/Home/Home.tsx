@@ -1,14 +1,13 @@
 import { useEffect } from 'react';
 import styled from 'styled-components';
 
+import { useAppSelector, useAppDispatch } from '@/app/store';
 import { Card, Spinner } from '@/components/';
-import { useSelector } from 'react-redux';
 import { useBookmarkChecker } from '@/hooks/useBookmarkChecker';
-import { useAppDispatch } from '@/features/store.hooks';
-import { getPopularList, selectPopularList } from '@/features/popularListSlice';
+import { getPopularList } from '@/features/popularListSlice';
 
 const Home = () => {
-  const { popularList, loading, error } = useSelector(selectPopularList);
+  const { popularList, loading, error } = useAppSelector((state) => state.popularList);
   const dispatch = useAppDispatch();
   const markedPopularList = useBookmarkChecker(popularList);
 
