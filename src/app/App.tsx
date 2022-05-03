@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
 import { Header, Footer, Toggle, Player } from '@/components';
-import { Normalize, Global } from '@/styles';
+import { GlobalStyle } from '@/styles';
 import { light, dark, fontSize, fontWeight } from '@/styles/theme';
 import useDarkMode from '@/hooks';
 import store from '@/app/store';
@@ -26,8 +26,7 @@ const App = () => {
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
-          <Normalize />
-          <Global />
+          <GlobalStyle />
 
           <Layout>
             <Header />
