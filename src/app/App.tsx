@@ -1,4 +1,4 @@
-import { lazy } from 'react';
+import { lazy, Suspense } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
@@ -31,11 +31,13 @@ const App = () => {
             <Header />
 
             <Content>
-              <Routes>
-                <Route path='/' element={<Home />} />
-                <Route path='search' element={<Search />} />
-                <Route path='playlist' element={<PlayList />} />
-              </Routes>
+              <Suspense fallback={<h2>로딩중..</h2>}>
+                <Routes>
+                  <Route path='/' element={<Home />} />
+                  <Route path='search' element={<Search />} />
+                  <Route path='playlist' element={<PlayList />} />
+                </Routes>
+              </Suspense>
             </Content>
 
             <Player />
