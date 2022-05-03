@@ -1,11 +1,13 @@
-import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { Header, Footer, Toggle, Player } from '@/components';
-import Router from '@/routes';
 import { Normalize, Global } from '@/styles';
 import { light, dark, fontSize, fontWeight } from '@/styles/theme';
 import useDarkMode from '@/hooks';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './store';
+import { Home, PlayList, Search } from '@/pages';
 
 const App = () => {
   const [themeMode, toggleTheme] = useDarkMode();
@@ -15,22 +17,30 @@ const App = () => {
       : { mode: dark, fontSize, fontWeight };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Normalize />
-      <Global />
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <Normalize />
+          <Global />
 
-      <Layout>
-        <Header />
+          <Layout>
+            <Header />
 
-        <Content>
-          <Router />
-        </Content>
+            <Content>
+              <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='search' element={<Search />} />
+                <Route path='playlist' element={<PlayList />} />
+              </Routes>
+            </Content>
 
-        <Player />
-        <Footer />
-      </Layout>
-      <Toggle themeMode={themeMode} toggleTheme={toggleTheme} />
-    </ThemeProvider>
+            <Player />
+            <Footer />
+          </Layout>
+          <Toggle themeMode={themeMode} toggleTheme={toggleTheme} />
+        </BrowserRouter>
+      </ThemeProvider>
+    </Provider>
   );
 };
 
