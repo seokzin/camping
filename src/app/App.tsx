@@ -1,13 +1,15 @@
 import { lazy, Suspense } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import styled, { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 
 import { Header, Footer, Toggle, Player } from '@/components';
 import { Normalize, Global } from '@/styles';
 import { light, dark, fontSize, fontWeight } from '@/styles/theme';
 import useDarkMode from '@/hooks';
-import store from './store';
+import store from '@/app/store';
+
+import { Content, Layout } from './App.styled';
 
 const Home = lazy(() => import('@/pages/Home'));
 const PlayList = lazy(() => import('@/pages/PlayList'));
@@ -49,29 +51,5 @@ const App = () => {
     </Provider>
   );
 };
-
-const Layout = styled.div`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  width: 375px;
-  height: 812px;
-
-  border-radius: 1rem;
-  background-color: ${({ theme }) => theme.mode.mainColor};
-  overflow: scroll;
-
-  ::-webkit-scrollbar {
-    display: none;
-  }
-`;
-
-const Content = styled.div`
-  box-sizing: border-box;
-  padding: 1rem;
-  min-height: calc(812px - 8.5rem);
-`;
 
 export default App;
