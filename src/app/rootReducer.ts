@@ -1,9 +1,9 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
-import { searchListSlice as searchListReducer } from '@/features';
 import playerReducer from '@/features/player/playerSlice';
 import playListReducer from '@/features/playList/playListSlice';
 import popularListReducer from '@/features/popularList/popularListSlice';
+import searchListReducer from '@/features/searchList/searchListSlice';
 
 const rootReducer = combineReducers({
   player: playerReducer,

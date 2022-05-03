@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useAppSelector, useAppDispatch } from '@/app/store';
 import { Card, Spinner } from '@/components/';
 import { SearchIcon } from '@/assets/icons';
-import { getSearchList, saveKeyword } from '@/features/searchListSlice';
+import { getSearchList, saveKeyword } from '@/features/searchList/searchListSlice';
 import { useBookmarkChecker } from '@/hooks/useBookmarkChecker';
 
 const Search = () => {
