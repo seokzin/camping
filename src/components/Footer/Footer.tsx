@@ -1,8 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-
-import FooterItem from './FooterItem';
 import { HomeIcon, PlaylistIcon, SearchIcon } from '@/assets/icons';
+import FooterItem from './FooterItem';
+import { Layout } from './Footer.styled';
 
 const data = [
   { name: 'home', path: '/', component: <HomeIcon /> },
@@ -19,19 +17,5 @@ const Footer = () => {
     </Layout>
   );
 };
-
-const Layout = styled.div`
-  display: flex;
-
-  position: sticky;
-  bottom: 0;
-
-  width: 100%;
-  height: 3rem;
-
-  background-color: ${({ theme }) => theme.mode.mainColor};
-  border-top: 1px solid ${({ theme }) => theme.mode.subColor};
-  z-index: 100;
-`;
 
 export default Footer;
