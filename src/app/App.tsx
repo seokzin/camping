@@ -1,13 +1,17 @@
+import { lazy } from 'react';
+import { Provider } from 'react-redux';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { Header, Footer, Toggle, Player } from '@/components';
 import { Normalize, Global } from '@/styles';
 import { light, dark, fontSize, fontWeight } from '@/styles/theme';
 import useDarkMode from '@/hooks';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Provider } from 'react-redux';
 import store from './store';
-import { Home, PlayList, Search } from '@/pages';
+
+const Home = lazy(() => import('@/pages/Home'));
+const PlayList = lazy(() => import('@/pages/PlayList'));
+const Search = lazy(() => import('@/pages/Search'));
 
 const App = () => {
   const [themeMode, toggleTheme] = useDarkMode();
