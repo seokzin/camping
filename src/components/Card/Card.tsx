@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '@/app/store';
 import type { Video } from '@/features/store.types';
 import { getPlayTime, getTimeStamp } from '@/utils';
 import { PlayIcon, BookmarkIcon } from '@/assets/icons';
@@ -21,7 +21,7 @@ interface Props {
 const Card = ({ video }: Props) => {
   const [isAdded, setIsAdded] = useState(video.bookmark);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   // store depandency가 존재 -> Card의 로직이 딥한 부분 + store 로직이 섞여서 재활용성 낮음
   const handleAddVideo = () => {

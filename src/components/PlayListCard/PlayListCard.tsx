@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
-import { useDispatch } from 'react-redux';
 import { Video } from '@/features/store.types';
 
 import { PlayIcon, XIcon } from '@/assets/icons';
 import { removeVideo } from '@/features/playListSlice';
 import { setVideo } from '@/features/playerSlice';
+import { useAppDispatch } from '@/app/store';
 
 interface ImageProps {
   isPlaying: boolean;
@@ -24,7 +24,7 @@ interface Props {
 const PlayListCard = ({ video }: Props) => {
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   // store depandency가 존재 -> Card의 로직이 딥한 부분 + store 로직이 섞여서 재활용성 낮음
   const handleRemoveVideo = () => {
