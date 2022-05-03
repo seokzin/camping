@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { Video } from '@/features/store.types';
 
 import { PlayIcon, XIcon } from '@/assets/icons';
-import { removeVideo } from '@/features/playListSlice';
+import { removeVideo } from '@/features/playList/playListSlice';
 import { setVideo } from '@/features/player/playerSlice';
 import { useAppDispatch } from '@/app/store';
 
