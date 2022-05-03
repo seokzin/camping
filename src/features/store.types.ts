@@ -7,53 +7,53 @@ export interface Video {
   bookmark: boolean;
 }
 
-export interface YoutubeResponse {
+export interface Youtube {
   kind: string;
   etag: string;
-  id: SearchResponseId;
-  snippet: Snippet;
-  contentDetails: ContentDetails;
+  id: YoutubeSearchResponseId;
+  snippet: YoutubeSnippet;
+  contentDetails: YoutubeContentDetails;
 }
 
-interface SearchResponseId {
+interface YoutubeSearchResponseId {
   kind: string;
   videoId: string;
 }
 
-interface Snippet {
+interface YoutubeSnippet {
   publishedAt: string;
   publishTime?: string;
   channelId: string;
   title: string;
   description: string;
-  thumbnails: Thumbnails;
+  thumbnails: YoutubeSnippetThumbnails;
   channelTitle: string;
   tags?: string[];
   categoryId: string;
   liveBroadcastContent: string;
-  localized: Localized;
+  localized: YoutubeSnippetLocalized;
 }
 
-interface Localized {
+interface YoutubeSnippetLocalized {
   title: string;
   description: string;
 }
 
-interface Thumbnails {
-  default: Thumbnail;
-  medium: Thumbnail;
-  high: Thumbnail;
-  standard: Thumbnail;
-  maxres: Thumbnail;
+interface YoutubeSnippetThumbnails {
+  default: YoutubeSnippetThumbnail;
+  medium: YoutubeSnippetThumbnail;
+  high: YoutubeSnippetThumbnail;
+  standard: YoutubeSnippetThumbnail;
+  maxres: YoutubeSnippetThumbnail;
 }
 
-interface Thumbnail {
+interface YoutubeSnippetThumbnail {
   url: string;
   width: number;
   height: number;
 }
 
-interface ContentDetails {
+interface YoutubeContentDetails {
   duration: string;
   dimension: string;
   definition: string;

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import type { RootState } from '@/app/rootReducer';
-import { Video, YoutubeResponse } from './store.types';
+import { Video, Youtube } from './store.types';
 import youtube from '@/services/youtube';
 
 interface popularListState {
@@ -26,7 +26,7 @@ export const getPopularList = createAsyncThunk('videos/getPopularList', async ()
     },
   });
 
-  return response.data.items.map((item: YoutubeResponse) => {
+  return response.data.items.map((item: Youtube) => {
     return {
       id: item.id,
       title: item.snippet.title,

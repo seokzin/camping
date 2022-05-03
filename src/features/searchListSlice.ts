@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import youtube from '@/services/youtube';
 import type { RootState } from '@/app/rootReducer';
-import type { Video, YoutubeResponse } from './store.types';
+import type { Video, Youtube } from './store.types';
 
 interface searchListState {
   searchList: Video[];
@@ -27,7 +27,7 @@ export const getSearchList = createAsyncThunk('videos/getSearchList', async (ter
     },
   });
 
-  const PromiseArrayResult = searchResult.data.items.map(async (item: YoutubeResponse) => {
+  const PromiseArrayResult = searchResult.data.items.map(async (item: Youtube) => {
     const response = await youtube.get('/videos', {
       params: {
         part: 'snippet, contentDetails',
@@ -35,7 +35,7 @@ export const getSearchList = createAsyncThunk('videos/getSearchList', async (ter
       },
     });
 
-    const videoData: YoutubeResponse = response.data.items[0];
+    const videoData: Youtube = response.data.items[0];
 
     return {
       id: videoData.id,
