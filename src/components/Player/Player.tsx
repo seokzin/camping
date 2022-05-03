@@ -5,7 +5,7 @@ import { PlayIcon, PauseIcon, SkipBackIcon, SkipForwardIcon } from '@/assets/ico
 
 import { useAppDispatch, useAppSelector } from '@/app/store';
 import { getPlayTime, getTimeStamp } from '@/utils';
-import { selectPlayer, setVideo, playVideo, stopVideo } from '@/features/playerSlice';
+import { playVideo, stopVideo } from '@/features/player/playerSlice';
 import { useState } from 'react';
 
 interface LayoutProps {

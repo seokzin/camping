@@ -4,7 +4,7 @@ import { Video } from '@/features/store.types';
 
 import { PlayIcon, XIcon } from '@/assets/icons';
 import { removeVideo } from '@/features/playListSlice';
-import { setVideo } from '@/features/playerSlice';
+import { setVideo } from '@/features/player/playerSlice';
 import { useAppDispatch } from '@/app/store';
 
 interface ImageProps {
