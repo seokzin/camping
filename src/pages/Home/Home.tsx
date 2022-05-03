@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useAppSelector, useAppDispatch } from '@/app/store';
 import { Card, Spinner } from '@/components/';
 import { useBookmarkChecker } from '@/hooks/useBookmarkChecker';
-import { getPopularList } from '@/features/popularListSlice';
+import { getPopularList } from '@/features/popularList/popularListSlice';
 
 const Home = () => {
   const { popularList, loading, error } = useAppSelector((state) => state.popularList);

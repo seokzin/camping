@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import type { RootState } from '@/app/rootReducer';
-import { Video, Youtube } from './store.types';
+import { Video, Youtube } from '@/features/store.types';
 import youtube from '@/services/youtube';
 
 interface popularListState {
