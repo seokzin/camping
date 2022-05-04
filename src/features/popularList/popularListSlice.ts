@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+
 import type { RootState } from '@/app/rootReducer';
 import { Video, Youtube } from '@/features/store.types';
 import youtube from '@/services/youtube';
@@ -15,28 +16,35 @@ const initialState: popularListState = {
   error: undefined,
 };
 
-export const getPopularList = createAsyncThunk('videos/getPopularList', async () => {
-  const response = await youtube.get('/videos', {
-    params: {
-      part: 'snippet, contentDetails',
-      chart: 'mostPopular',
-      maxResults: 10,
-      regionCode: 'KR',
-      videoCategoryId: '10', // Music
-    },
-  });
+export const getPopularList = createAsyncThunk(
+  'videos/getPopularList',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await youtube.get('/videos', {
+        params: {
+          part: 'snippet, contentDetails',
+          chart: 'mostPopular',
+          maxResults: 10,
+          regionCode: 'KR',
+          videoCategoryId: '10',
+        },
+      });
 
-  return response.data.items.map((item: Youtube) => {
-    return {
-      id: item.id,
-      title: item.snippet.title,
-      channelTitle: item.snippet.channelTitle,
-      thumbnail: item.snippet.thumbnails.medium.url,
-      duration: item.contentDetails.duration,
-      bookmark: false,
-    };
-  });
-});
+      return response.data.items.map((item: Youtube) => {
+        return {
+          id: item.id,
+          title: item.snippet.title,
+          channelTitle: item.snippet.channelTitle,
+          thumbnail: item.snippet.thumbnails.medium.url,
+          duration: item.contentDetails.duration,
+          bookmark: false,
+        };
+      });
+    } catch (error) {
+      return rejectWithValue('Fail to load response.');
+    }
+  },
+);
 
 export const popularListSlice = createSlice({
   name: 'popularList',
