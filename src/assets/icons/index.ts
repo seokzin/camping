@@ -11,3 +11,4 @@ export { ReactComponent as SkipBackIcon } from './skip-back.svg';
 export { ReactComponent as SkipForwardIcon } from './skip-forward.svg';
 export { ReactComponent as BookmarkIcon } from './bookmark.svg';
 export { ReactComponent as XIcon } from './x.svg';
+export { ReactComponent as ArchiveIcon } from './archive.svg';
