@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react';
 import YouTube from '@u-wave/react-youtube';
 
 import { PlayIcon, PauseIcon, SkipBackIcon, SkipForwardIcon } from '@/assets/icons';
-import { useAppDispatch, useAppSelector } from '@/app/store';
+import { useAppSelector } from '@/app/store';
 import { getPlayTime, getTimeStamp } from '@/utils';
-import { setVideo } from '@/features/playList/playListSlice';
 
 import {
   ChannelTitle,
@@ -18,8 +17,6 @@ import {
 
 const Player = () => {
   const { playingVideo } = useAppSelector((state) => state.playList);
-
-  const dispatch = useAppDispatch();
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [player, setPlayer] = useState<any>();
@@ -58,7 +55,7 @@ const Player = () => {
         <Title>{playingVideo.title}</Title>
         <ChannelTitle>{playingVideo?.channelTitle}</ChannelTitle>
         <Duration>
-          {getTimeStamp(playTime)} /{getTimeStamp(getPlayTime(playingVideo.duration))}
+          {getTimeStamp(playTime)} / {getTimeStamp(getPlayTime(playingVideo.duration))}
         </Duration>
       </InfoBox>
 

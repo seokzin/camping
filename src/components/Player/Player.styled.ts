@@ -65,6 +65,8 @@ export const Duration = styled.p`
 
   color: ${({ theme }) => theme.mode.subText};
   font-size: ${({ theme }) => theme.fontSize.xs};
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.04rem;
 `;
 
 export const ControllerBox = styled.div`
