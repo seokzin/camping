@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import YouTube from '@u-wave/react-youtube';
 
 import { PlayIcon, PauseIcon, SkipBackIcon, SkipForwardIcon } from '@/assets/icons';
@@ -18,12 +18,32 @@ import {
 
 const Player = () => {
   const { playingVideo } = useAppSelector((state) => state.playList);
+
   const dispatch = useAppDispatch();
 
   const [isPlaying, setIsPlaying] = useState(false);
+  const [player, setPlayer] = useState<any>();
+  const [playTime, setPlayTime] = useState<number>(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setPlayTime(player.getCurrentTime());
+    }, 500);
+
+    return () => clearInterval(timer);
+  }, [isPlaying, player]);
 
   const togglePlay = () => {
     setIsPlaying(!isPlaying);
+  };
+
+  const handleStateChange = (e: any) => {
+    setPlayer(e.target);
+    setPlayTime(player.getCurrentTime());
+  };
+
+  const handleReady = (e: any) => {
+    setPlayer(e.target);
   };
 
   if (!playingVideo) {
@@ -38,11 +58,17 @@ const Player = () => {
         <Title>{playingVideo.title}</Title>
         <ChannelTitle>{playingVideo?.channelTitle}</ChannelTitle>
         <Duration>
-          {getTimeStamp(0)} /{getTimeStamp(getPlayTime(playingVideo.duration))}
+          {getTimeStamp(playTime)} /{getTimeStamp(getPlayTime(playingVideo.duration))}
         </Duration>
       </InfoBox>
 
-      <YouTube video={playingVideo.id} paused={isPlaying} autoplay />
+      <YouTube
+        video={playingVideo.id}
+        paused={isPlaying}
+        onStateChange={handleStateChange}
+        onReady={handleReady}
+        autoplay
+      />
 
       <ControllerBox>
         <SkipBackIcon width={20} height={20} />

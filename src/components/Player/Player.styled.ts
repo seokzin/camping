@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const Layout = styled.div`
   box-sizing: border-box;
@@ -26,8 +26,8 @@ export const Layout = styled.div`
   }
 
   iframe {
-    width: 0;
-    height: 0;
+    width: 2rem;
+    height: 2rem;
   }
 `;
 
