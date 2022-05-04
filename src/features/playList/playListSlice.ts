@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction, current } from '@reduxjs/toolkit';
 
-import type { RootState } from '@/app/rootReducer';
 import type { Video } from '@/features/store.types';
 
 interface playListState {
@@ -27,5 +26,4 @@ export const playListSlice = createSlice({
 });
 
 export const { addVideo, removeVideo } = playListSlice.actions;
-export const selectPlayList = (state: RootState) => state.playList;
 export default playListSlice.reducer;

@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 
 import youtube from '@/services/youtube';
-import type { RootState } from '@/app/rootReducer';
 import type { Video, Youtube } from '@/features/store.types';
 
 interface searchListState {
@@ -78,5 +77,4 @@ export const searchListSlice = createSlice({
 });
 
 export const { saveKeyword } = searchListSlice.actions;
-export const selectSearchList = (state: RootState) => state.searchList;
 export default searchListSlice.reducer;

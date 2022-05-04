@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 
 import youtube from '@/services/youtube';
-import type { RootState } from '@/app/rootReducer';
 import type { Video, Youtube } from '@/features/store.types';
 
 const CATEGORY_ID_MUSIC = '10';
@@ -68,5 +67,4 @@ export const popularListSlice = createSlice({
   },
 });
 
-export const selectPopularList = (state: RootState) => state.popularList;
 export default popularListSlice.reducer;
