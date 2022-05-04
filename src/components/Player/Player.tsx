@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import YouTube from 'react-youtube';
+import YouTube from '@u-wave/react-youtube';
 
 import { PlayIcon, PauseIcon, SkipBackIcon, SkipForwardIcon } from '@/assets/icons';
 import { useAppDispatch, useAppSelector } from '@/app/store';
 import { getPlayTime, getTimeStamp } from '@/utils';
-import { playVideo, stopVideo } from '@/features/player/playerSlice';
+import { setVideo } from '@/features/playList/playListSlice';
 
 import {
   ChannelTitle,
@@ -17,47 +17,36 @@ import {
 } from './Player.styled';
 
 const Player = () => {
-  const [player, setPlayer] = useState<any>(undefined);
-  const { playingVideo, status } = useAppSelector((state) => state.player);
+  const { playingVideo } = useAppSelector((state) => state.playList);
   const dispatch = useAppDispatch();
 
-  const onReady = (e: any) => {
-    setPlayer(e.target);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const togglePlay = () => {
+    setIsPlaying(!isPlaying);
   };
 
-  const onPlay = () => {
-    if (playingVideo) {
-      player.pauseVideo();
-      dispatch(playVideo(playingVideo));
-    }
-  };
-
-  const onPause = () => {
-    if (playingVideo) {
-      player.pauseVideo();
-      dispatch(stopVideo(playingVideo));
-    }
-  };
+  if (!playingVideo) {
+    return <></>;
+  }
 
   return (
-    <Layout status={status}>
-      <Image src={playingVideo?.thumbnail} />
+    <Layout>
+      <Image src={playingVideo.thumbnail} />
 
       <InfoBox>
-        <Title>{playingVideo?.title}</Title>
+        <Title>{playingVideo.title}</Title>
         <ChannelTitle>{playingVideo?.channelTitle}</ChannelTitle>
-        {playingVideo && (
-          <Duration>
-            {getTimeStamp(0)} /{getTimeStamp(playingVideo && getPlayTime(playingVideo?.duration))}
-          </Duration>
-        )}
+        <Duration>
+          {getTimeStamp(0)} /{getTimeStamp(getPlayTime(playingVideo.duration))}
+        </Duration>
       </InfoBox>
 
-      <YouTube videoId={playingVideo?.id} onReady={onReady} onPlay={onPlay} onPause={onPause} />
+      <YouTube video={playingVideo.id} paused={isPlaying} autoplay />
 
       <ControllerBox>
         <SkipBackIcon width={20} height={20} />
-        {status === 'play' ? <PlayIcon onClick={onPlay} /> : <PauseIcon onClick={onPause} />}
+        {isPlaying ? <PlayIcon onClick={togglePlay} /> : <PauseIcon onClick={togglePlay} />}
         <SkipForwardIcon width={20} height={20} />
       </ControllerBox>
     </Layout>

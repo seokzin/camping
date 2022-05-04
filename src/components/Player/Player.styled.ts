@@ -1,10 +1,6 @@
 import styled, { css } from 'styled-components';
 
-interface LayoutProps {
-  status: 'play' | 'stop';
-}
-
-export const Layout = styled.div<LayoutProps>`
+export const Layout = styled.div`
   box-sizing: border-box;
 
   display: flex;
@@ -25,20 +21,13 @@ export const Layout = styled.div<LayoutProps>`
 
   background-color: ${({ theme }) => theme.mode.mainColor};
 
-  ${(props) =>
-    !props.status &&
-    css`
-      visibility: hidden;
-    `}
-
   svg path {
     fill: ${({ theme }) => theme.mode.mainText};
   }
 
-  // Youtube
   iframe {
-    width: 2rem;
-    height: 2rem;
+    width: 0;
+    height: 0;
   }
 `;
 
