@@ -4,6 +4,8 @@ import type { RootState } from '@/app/rootReducer';
 import { Video, Youtube } from '@/features/store.types';
 import youtube from '@/services/youtube';
 
+const CATEGORY_ID_MUSIC = '10';
+
 interface popularListState {
   popularList: Video[];
   loading: 'idle' | 'pending';
@@ -26,7 +28,7 @@ export const getPopularList = createAsyncThunk(
           chart: 'mostPopular',
           maxResults: 10,
           regionCode: 'KR',
-          videoCategoryId: '10',
+          videoCategoryId: CATEGORY_ID_MUSIC,
         },
       });
 
