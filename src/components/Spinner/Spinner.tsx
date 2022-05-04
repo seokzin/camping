@@ -1,7 +1,13 @@
-import { Layout } from './Spinner.styled';
+import { Layout, Content, SpinRing } from './Spinner.styled';
 
 const Spinner = () => {
-  return <Layout>Loading...</Layout>;
+  return (
+    <Layout>
+      <Content>
+        <SpinRing />
+      </Content>
+    </Layout>
+  );
 };
 
 export default Spinner;
