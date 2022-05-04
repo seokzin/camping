@@ -1,12 +1,12 @@
 import React from 'react';
 
 import { useAppSelector, useAppDispatch } from '@/app/store';
-import { Card, Spinner } from '@/components';
+import { Card, EmptyList, Spinner } from '@/components';
 import { SearchIcon } from '@/assets/icons';
 import { getSearchList, saveKeyword } from '@/features/searchList/searchListSlice';
 import { useBookmarkChecker } from '@/hooks';
 
-import { Error, Layout, SearchInput } from './Search.styled';
+import { Layout, SearchInput } from './Search.styled';
 
 const Search = () => {
   const { searchList, searchKeyword, loading, error } = useAppSelector((state) => state.searchList);
@@ -39,9 +39,9 @@ const Search = () => {
       {loading === 'pending' ? (
         <Spinner />
       ) : error ? (
-        <Error>{error}</Error>
+        <EmptyList msg='검색 결과가 없어요.' />
       ) : (
-        markedSearchList?.map((video, index) => <Card video={video} key={index} />)
+        markedSearchList.map((video, index) => <Card video={video} key={index} />)
       )}
     </>
   );
