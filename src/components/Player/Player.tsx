@@ -29,7 +29,6 @@ const Player = () => {
 
   const onReady = (e: any) => {
     setPlayer(e.target);
-    console.log(player);
   };
 
   const onPlay = () => {

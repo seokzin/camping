@@ -65,7 +65,6 @@ export const searchListSlice = createSlice({
 
       .addCase(getSearchList.fulfilled, (state, { payload }: PayloadAction<Video[]>) => {
         state.loading = 'idle';
-        console.log('나', payload);
         state.searchList = payload;
       })
       .addCase(getSearchList.rejected, (state, { error }) => {
