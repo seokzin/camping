@@ -1,10 +1,12 @@
 import { useState } from 'react';
+
 import { useAppDispatch } from '@/app/store';
-import type { Video } from '@/features/store.types';
-import { getPlayTime, getTimeStamp } from '@/utils';
 import { PlayIcon, BookmarkIcon } from '@/assets/icons';
+import type { Video } from '@/features/store.types';
 import { addVideo, removeVideo } from '@/features/playList/playListSlice';
 import { setVideo } from '@/features/player/playerSlice';
+import { getPlayTime, getTimeStamp } from '@/utils';
+
 import {
   BookmarkButton,
   ChannelTitle,

@@ -1,11 +1,11 @@
+import { useState } from 'react';
 import YouTube from 'react-youtube';
 
 import { PlayIcon, PauseIcon, SkipBackIcon, SkipForwardIcon } from '@/assets/icons';
-
 import { useAppDispatch, useAppSelector } from '@/app/store';
 import { getPlayTime, getTimeStamp } from '@/utils';
 import { playVideo, stopVideo } from '@/features/player/playerSlice';
-import { useState } from 'react';
+
 import {
   ChannelTitle,
   ControllerBox,

@@ -6,7 +6,7 @@ import { ThemeProvider } from 'styled-components';
 import { Header, Footer, Toggle, Player } from '@/components';
 import { GlobalStyle } from '@/styles';
 import { light, dark, fontSize, fontWeight } from '@/styles/theme';
-import useDarkMode from '@/hooks';
+import { useDarkMode } from '@/hooks';
 import store from '@/app/store';
 
 import { Content, Layout } from './App.styled';

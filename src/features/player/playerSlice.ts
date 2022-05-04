@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import type { RootState } from '@/app/rootReducer';
-import { Video } from '@/features/store.types';
+import type { Video } from '@/features/store.types';
 
 interface playerState {
   playingVideo: Video | undefined;

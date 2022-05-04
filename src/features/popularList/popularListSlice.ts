@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 
-import type { RootState } from '@/app/rootReducer';
-import { Video, Youtube } from '@/features/store.types';
 import youtube from '@/services/youtube';
+import type { RootState } from '@/app/rootReducer';
+import type { Video, Youtube } from '@/features/store.types';
 
 const CATEGORY_ID_MUSIC = '10';
 

@@ -1,4 +1,5 @@
 import { HomeIcon, PlaylistIcon, SearchIcon } from '@/assets/icons';
+
 import FooterItem from './FooterItem';
 import { Layout } from './Footer.styled';
 

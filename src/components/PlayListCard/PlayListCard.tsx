@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { Video } from '@/features/store.types';
 
 import { PlayIcon, XIcon } from '@/assets/icons';
+import type { Video } from '@/features/store.types';
 import { removeVideo } from '@/features/playList/playListSlice';
 import { setVideo } from '@/features/player/playerSlice';
 import { useAppDispatch } from '@/app/store';
+
 import {
   ChannelTitle,
   DeleteButton,
