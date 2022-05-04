@@ -3,12 +3,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { Video } from '@/features/store.types';
 
 interface playerState {
-  playingVideo: Video | undefined;
+  playingVideo?: Video;
   status: 'play' | 'stop';
 }
 
 const initialState: playerState = {
-  playingVideo: undefined,
   status: 'stop',
 };
 

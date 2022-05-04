@@ -7,14 +7,13 @@ interface searchListState {
   searchList: Video[];
   searchKeyword: string;
   loading: 'idle' | 'pending';
-  error: undefined | string;
+  error?: string;
 }
 
 const initialState: searchListState = {
   searchList: [],
   searchKeyword: '',
   loading: 'idle',
-  error: undefined,
 };
 
 export const getSearchList = createAsyncThunk('videos/getSearchList', async (term: string) => {

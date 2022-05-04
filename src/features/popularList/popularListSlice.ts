@@ -8,13 +8,12 @@ const CATEGORY_ID_MUSIC = '10';
 interface popularListState {
   popularList: Video[];
   loading: 'idle' | 'pending';
-  error: undefined | string;
+  error?: string;
 }
 
 const initialState: popularListState = {
   popularList: [],
   loading: 'idle',
-  error: undefined,
 };
 
 export const getPopularList = createAsyncThunk(
