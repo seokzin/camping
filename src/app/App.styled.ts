@@ -24,7 +24,7 @@ export const Layout = styled.div`
 export const Content = styled.div`
   box-sizing: border-box;
 
-  min-height: calc(812px - 8.5rem);
+  min-height: 812px;
 
   padding: 1rem;
 `;
