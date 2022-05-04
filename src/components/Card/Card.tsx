@@ -4,7 +4,7 @@ import { useAppDispatch } from '@/app/store';
 import { PlayIcon, BookmarkIcon } from '@/assets/icons';
 import type { Video } from '@/features/store.types';
 import { addVideo, removeVideo } from '@/features/playList/playListSlice';
-import { setVideo } from '@/features/player/playerSlice';
+import { setVideo } from '@/features/playList/playListSlice';
 import { getPlayTime, getTimeStamp } from '@/utils';
 
 import {
@@ -27,7 +27,6 @@ const Card = ({ video }: CardProps) => {
 
   const dispatch = useAppDispatch();
 
-  // store depandency가 존재 -> Card의 로직이 딥한 부분 + store 로직이 섞여서 재활용성 낮음
   const handleAddVideo = () => {
     if (isAdded) {
       dispatch(removeVideo({ ...video, bookmark: false }));

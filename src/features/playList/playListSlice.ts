@@ -4,6 +4,7 @@ import type { Video } from '@/features/store.types';
 
 interface playListState {
   playList: Video[];
+  playingVideo?: Video;
 }
 
 const initialState: playListState = {
@@ -22,8 +23,11 @@ export const playListSlice = createSlice({
     removeVideo: (state, { payload }: PayloadAction<Video>) => {
       state.playList = state.playList.filter((item) => item.id !== payload.id);
     },
+    setVideo: (state, { payload }: PayloadAction<Video>) => {
+      state.playingVideo = payload;
+    },
   },
 });
 
-export const { addVideo, removeVideo } = playListSlice.actions;
+export const { addVideo, removeVideo, setVideo } = playListSlice.actions;
 export default playListSlice.reducer;
