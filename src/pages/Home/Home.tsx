@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 
 import { useAppSelector, useAppDispatch } from '@/app/store';
-import { Card, Spinner } from '@/components/';
-import { useBookmarkChecker } from '@/hooks/useBookmarkChecker';
+import { Card, Spinner } from '@/components';
+import { useBookmarkChecker } from '@/hooks';
 import { getPopularList } from '@/features/popularList/popularListSlice';
+
 import { Title, Error } from './Home.styled';
 
 const Home = () => {

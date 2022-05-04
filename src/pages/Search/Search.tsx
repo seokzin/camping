@@ -1,10 +1,11 @@
 import React from 'react';
 
 import { useAppSelector, useAppDispatch } from '@/app/store';
-import { Card, Spinner } from '@/components/';
+import { Card, Spinner } from '@/components';
 import { SearchIcon } from '@/assets/icons';
 import { getSearchList, saveKeyword } from '@/features/searchList/searchListSlice';
-import { useBookmarkChecker } from '@/hooks/useBookmarkChecker';
+import { useBookmarkChecker } from '@/hooks';
+
 import { Error, Layout, SearchInput } from './Search.styled';
 
 const Search = () => {
