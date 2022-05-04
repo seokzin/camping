@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface SpinRingProps {
+  size: 'large' | 'small';
+}
+
 export const Layout = styled.div`
   position: relative;
 
@@ -15,9 +19,9 @@ export const Content = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-export const SpinRing = styled.div`
-  width: 32px;
-  height: 32px;
+export const SpinRing = styled.div<SpinRingProps>`
+  width: ${({ size }) => (size === 'small' ? '32px' : '64px')};
+  height: ${({ size }) => (size === 'small' ? '32px' : '64px')};
 
   border: 6px solid ${({ theme }) => theme.mode.mainText};
   border-top: 6px solid ${({ theme }) => theme.mode.mainColor};

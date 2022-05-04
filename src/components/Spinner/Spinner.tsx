@@ -1,10 +1,14 @@
 import { Layout, Content, SpinRing } from './Spinner.styled';
 
-const Spinner = () => {
+interface SpinnerProps {
+  size?: 'large' | 'small';
+}
+
+const Spinner = ({ size = 'small' }: SpinnerProps) => {
   return (
     <Layout>
       <Content>
-        <SpinRing />
+        <SpinRing size={size} />
       </Content>
     </Layout>
   );

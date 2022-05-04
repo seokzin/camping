@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
-import { Header, Footer, Toggle, Player } from '@/components';
+import { Header, Footer, Toggle, Player, Spinner } from '@/components';
 import { GlobalStyle } from '@/styles';
 import { light, dark, fontSize, fontWeight } from '@/styles/theme';
 import { useDarkMode } from '@/hooks';
@@ -32,7 +32,7 @@ const App = () => {
             <Header />
 
             <Content>
-              <Suspense fallback={<h2>로딩중..</h2>}>
+              <Suspense fallback={<Spinner size='large' />}>
                 <Routes>
                   <Route path='/' element={<Home />} />
                   <Route path='search' element={<Search />} />
