@@ -5,10 +5,11 @@ const GlobalStyle = createGlobalStyle`
   ${Normalize}
   
   body {
-  font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue',
-    'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
-  letter-spacing: -0.02rem;
-  background-color: #6868AB;
+    background-color: #6868AB;
+    
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue',
+      'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    letter-spacing: -0.02rem;
   }
 
   * {
@@ -22,8 +23,9 @@ const GlobalStyle = createGlobalStyle`
   h5,
   h6,
   p {
-    color: ${({ theme }) => theme.mode.title};
     margin: 0;
+    
+    color: ${({ theme }) => theme.mode.title};
   }
 
   svg  {

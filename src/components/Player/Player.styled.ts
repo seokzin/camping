@@ -6,7 +6,6 @@ interface LayoutProps {
 
 export const Layout = styled.div<LayoutProps>`
   box-sizing: border-box;
-  padding: 0 1rem;
 
   display: flex;
   justify-content: space-between;
@@ -15,18 +14,22 @@ export const Layout = styled.div<LayoutProps>`
   position: sticky;
   bottom: 3rem;
 
+  z-index: 100;
+
   width: 100%;
   height: 4rem;
+
+  padding: 0 1rem;
+
+  border-top: 1px solid ${({ theme }) => theme.mode.subColor};
+
+  background-color: ${({ theme }) => theme.mode.mainColor};
 
   ${(props) =>
     !props.status &&
     css`
       visibility: hidden;
     `}
-
-  background-color: ${({ theme }) => theme.mode.mainColor};
-  border-top: 1px solid ${({ theme }) => theme.mode.subColor};
-  z-index: 100;
 
   svg path {
     fill: ${({ theme }) => theme.mode.mainText};
@@ -41,34 +44,39 @@ export const Layout = styled.div<LayoutProps>`
 
 export const InfoBox = styled.div`
   width: 12rem;
+
   margin-right: 1rem;
 `;
 
 export const Title = styled.h1`
-  font-size: ${({ theme }) => theme.fontSize.sm};
-  color: ${({ theme }) => theme.mode.mainText};
-
-  overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
+
+  overflow: hidden;
+
+  color: ${({ theme }) => theme.mode.mainText};
+  font-size: ${({ theme }) => theme.fontSize.sm};
 `;
 
 export const ChannelTitle = styled.h3`
-  font-size: ${({ theme }) => theme.fontSize.xs};
   color: ${({ theme }) => theme.mode.subText};
+  font-size: ${({ theme }) => theme.fontSize.xs};
 `;
 
 export const Image = styled.img`
   height: 3rem;
-  border-radius: 0.25rem;
+
   margin-right: 0.5rem;
+
+  border-radius: 0.25rem;
 `;
 
 export const Duration = styled.p`
   margin-top: 0.2rem;
-  font-size: ${({ theme }) => theme.fontSize.xs};
+
   color: ${({ theme }) => theme.mode.subText};
+  font-size: ${({ theme }) => theme.fontSize.xs};
 `;
 
 export const ControllerBox = styled.div`

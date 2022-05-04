@@ -22,24 +22,26 @@ export const ImageBox = styled.div`
 export const Image = styled.img`
   width: 100%;
   height: 12rem;
+
   border-radius: 0.5rem;
 `;
 
 export const PlayButton = styled.button`
-  position: absolute;
-  top: 0.5rem;
-  right: 3rem;
-
   display: flex;
   justify-content: center;
   align-items: center;
 
+  position: absolute;
+  top: 0.5rem;
+  right: 3rem;
+
   width: 2rem;
   height: 2rem;
+
+  border: none;
   border-radius: 50%;
 
   background-color: ${({ theme }) => theme.mode.subColor};
-  border: none;
 
   svg {
     fill: ${({ theme }) => theme.mode.mainText};
@@ -47,20 +49,21 @@ export const PlayButton = styled.button`
 `;
 
 export const BookmarkButton = styled.button<BookmarkButtonProps>`
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-
   display: flex;
   justify-content: center;
   align-items: center;
 
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+
   width: 2rem;
   height: 2rem;
+
+  border: none;
   border-radius: 50%;
 
   background-color: ${({ theme }) => theme.mode.subColor};
-  border: none;
 
   svg {
     fill: ${(props) => (props.isAdded ? ({ theme }) => theme.mode.mainText : 'none')};
@@ -68,32 +71,38 @@ export const BookmarkButton = styled.button<BookmarkButtonProps>`
 `;
 
 export const Duration = styled.p`
+  overflow: hidden;
+
   position: absolute;
   bottom: 0.5rem;
   right: 0.2rem;
-  background-color: #00000077;
-  color: #ffffff;
-  overflow: hidden;
+
   padding: 0.3rem;
+
   border-radius: 0.3rem;
+
+  background-color: #00000077;
+
+  color: #ffffff;
   font-size: ${({ theme }) => theme.fontSize.xs};
 `;
 
 export const Title = styled.h2`
-  margin-top: 0.3rem;
-
-  font-size: ${({ theme }) => theme.fontSize.md};
-  color: ${({ theme }) => theme.mode.mainText};
-
-  overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+
+  overflow: hidden;
+
+  margin-top: 0.3rem;
+
+  color: ${({ theme }) => theme.mode.mainText};
+  font-size: ${({ theme }) => theme.fontSize.md};
 `;
 
 export const ChannelTitle = styled.h3`
   margin-top: 0.2rem;
 
-  font-size: ${({ theme }) => theme.fontSize.sm};
   color: ${({ theme }) => theme.mode.subText};
+  font-size: ${({ theme }) => theme.fontSize.sm};
 `;

@@ -10,20 +10,25 @@ interface PlayIconBoxProps {
 
 export const Layout = styled.div`
   display: flex;
+
   padding: 0.3rem 0;
+
   cursor: pointer;
 `;
 
 export const ImageBox = styled.div`
-  position: relative;
   display: flex;
   align-items: center;
+
+  position: relative;
 `;
 
 export const Image = styled.img<ImageProps>`
+  object-fit: cover;
+
   width: 4rem;
   height: 3rem;
-  object-fit: cover;
+
   border-radius: 0.25rem;
 
   ${(props) =>
@@ -37,10 +42,12 @@ export const PlayIconBox = styled.button<PlayIconBoxProps>`
   position: absolute;
   top: 1.5rem;
   left: 2rem;
-  transform: translate(-50%, -50%);
+
+  border: none;
 
   background-color: transparent;
-  border: none;
+
+  transform: translate(-50%, -50%);
 
   svg {
     fill: ${({ theme }) => theme.mode.mainText};
@@ -54,9 +61,12 @@ export const PlayIconBox = styled.button<PlayIconBoxProps>`
 `;
 
 export const DeleteButton = styled.button`
-  background-color: transparent;
-  border: none;
   margin-left: 0.5rem;
+
+  border: none;
+
+  background-color: transparent;
+
   svg {
     fill: ${({ theme }) => theme.mode.mainText};
   }
@@ -68,24 +78,26 @@ export const InfoBox = styled.div`
   align-items: center;
 
   width: 100%;
+
   margin-left: 0.5rem;
 `;
 
 export const Info = styled.div``;
 
 export const Title = styled.h2`
-  font-size: ${({ theme }) => theme.fontSize.sm};
-  color: ${({ theme }) => theme.mode.mainText};
-
   overflow: hidden;
+
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+
+  color: ${({ theme }) => theme.mode.mainText};
+  font-size: ${({ theme }) => theme.fontSize.sm};
 `;
 
 export const ChannelTitle = styled.h3`
   margin-top: 0.2rem;
 
-  font-size: ${({ theme }) => theme.fontSize.xs};
   color: ${({ theme }) => theme.mode.subText};
+  font-size: ${({ theme }) => theme.fontSize.xs};
 `;
