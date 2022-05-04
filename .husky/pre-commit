@@ -1,6 +1,0 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
-yarn lint-staged
-# TODO - 테스트 코드 작성된 후 사용
-# yarn test

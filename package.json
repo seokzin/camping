@@ -32,11 +32,7 @@
     "start": "craco start",
     "build": "craco build & firebase deploy --only hosting",
     "test": "jest",
-    "eject": "craco eject",
-    "prepare": "husky install",
-    "lint-staged": "lint-staged",
-    "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "eject": "craco eject"
   },
   "lint-staged": {
     "**/*.{ts,tsx}": [
@@ -72,21 +68,12 @@
     ]
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^6.4.14",
-    "@storybook/addon-essentials": "^6.4.14",
-    "@storybook/addon-links": "^6.4.14",
-    "@storybook/builder-webpack5": "^6.4.14",
-    "@storybook/manager-webpack5": "^6.4.14",
-    "@storybook/node-logger": "^6.4.14",
-    "@storybook/preset-create-react-app": "^4.0.0",
-    "@storybook/react": "^6.4.14",
     "@types/react-redux": "^7.1.22",
     "@typescript-eslint/parser": "^5.10.0",
     "craco-alias": "^3.0.1",
     "eslint": "^8.7.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "husky": "^7.0.0",
     "jest": "^27.4.7",
     "lint-staged": "^12.3.1",
     "prettier": "^2.5.1",
