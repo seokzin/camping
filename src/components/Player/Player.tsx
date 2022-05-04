@@ -21,12 +21,6 @@ const Player = () => {
   const { playingVideo, status } = useAppSelector((state) => state.player);
   const dispatch = useAppDispatch();
 
-  // const onClick = () => {
-  //   if (playingVideo) {
-  //     status === 'play' ? dispatch(stopVideo(playingVideo)) : dispatch(playVideo(playingVideo));
-  //   }
-  // };
-
   const onReady = (e: any) => {
     setPlayer(e.target);
   };
