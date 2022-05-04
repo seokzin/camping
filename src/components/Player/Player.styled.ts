@@ -26,8 +26,7 @@ export const Layout = styled.div`
   }
 
   iframe {
-    width: 2rem;
-    height: 2rem;
+    display: none;
   }
 `;
 
