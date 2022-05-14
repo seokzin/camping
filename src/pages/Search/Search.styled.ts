@@ -10,6 +10,10 @@ export const Layout = styled.div`
   margin-bottom: 1rem;
 
   border-bottom: 1px solid gray;
+
+  svg {
+    cursor: pointer;
+  }
 `;
 
 export const Error = styled.p``;

@@ -73,4 +73,8 @@ export const ControllerBox = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
+
+  svg {
+    cursor: pointer;
+  }
 `;

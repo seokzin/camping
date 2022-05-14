@@ -43,6 +43,8 @@ export const PlayButton = styled.button`
 
   background-color: ${({ theme }) => theme.mode.subColor};
 
+  cursor: pointer;
+
   svg {
     fill: ${({ theme }) => theme.mode.mainText};
   }
@@ -64,6 +66,8 @@ export const BookmarkButton = styled.button<BookmarkButtonProps>`
   border-radius: 50%;
 
   background-color: ${({ theme }) => theme.mode.subColor};
+
+  cursor: pointer;
 
   svg {
     fill: ${(props) => (props.isAdded ? ({ theme }) => theme.mode.mainText : 'none')};

@@ -29,8 +29,6 @@ const GlobalStyle = createGlobalStyle`
   }
 
   svg  {
-    cursor: pointer;
-    
     path {
       stroke: ${({ theme }) => theme.mode.mainText};
     }
