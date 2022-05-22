@@ -24,7 +24,7 @@ const Player = () => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setPlayTime(player.getCurrentTime());
+      setPlayTime(player?.getCurrentTime());
     }, 500);
 
     return () => clearInterval(timer);
