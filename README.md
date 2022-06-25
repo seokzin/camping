@@ -16,11 +16,9 @@ yarn start
 ## 📚 Stack
 
 - React
-- React-router-dom
 - Redux Toolkit
 - Typescript
 - Styled-components
-- Storybook
 
 <br />
 
