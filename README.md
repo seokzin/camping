@@ -1,24 +1,17 @@
-# Space
+# Camping
 
-- Youtube Data API를 활용한 유튜브 음악 플레이어
-
-<br />
-
-## 🔧 Install
-
-```sh
-yarn / yarn install)
-yarn start
-```
+- 유튜브 뮤직 플레이어
 
 <br />
 
 ## 📚 Stacks
 
-- React
-- Typescript
-- Redux Toolkit
-- Styled-components
+- Next.js (TurboPack)
+- TypeScript
+- Styled Components
+- State Management (Recoil, React Query)
+- Testing Libraries (Jest, React Testing Library)
+- Linters (ESLint, Prettier, Stylelint, Husky)
 
 <br />
 
@@ -26,17 +19,16 @@ yarn start
 
 ```
 ├── 📂 public                            // Static Files
-└── 📂 src
-    ├── 📂 app                           // Root Components & Redux Store
-    ├── 📂 assets                        // CSV Files
-    ├── 📂 components                    // Components
-    ├── 📂 features                      // Redux Features
-    ├── 📂 hooks                         // Custom Hooks
-    ├── 📂 pages                         // Pages
-    ├── 📂 services                      // API Services   
-    ├── 📂 styles                        // Global Styles
-    ├── 📂 utils                         // Utility Functions
-    └── 📑 index.tsx                     // Entry Point
+├── 📂 app                           // Root Components & Redux Store
+├── 📂 assets                        // CSV Files
+├── 📂 components                    // Components
+├── 📂 features                      // Redux Features
+├── 📂 hooks                         // Custom Hooks
+├── 📂 pages                         // Pages
+├── 📂 services                      // API Services
+├── 📂 styles                        // Global Styles
+├── 📂 utils                         // Utility Functions
+└── 📑 index.tsx                     // Entry Point
 ```
 
 <br />
@@ -51,5 +43,4 @@ yarn start
 
 ![image](https://user-images.githubusercontent.com/43740455/168425345-dc2ec9ee-96bc-4f54-b2bb-cc9ac4912ed0.png)
 
-## 현재 개발중
-
+## 리뉴얼중
