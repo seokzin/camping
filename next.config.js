@@ -1,11 +1,11 @@
-/** @type {import('next').NextConfig} */
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const nextConfig = {
-  reactStrictMode: true, // Recommended for the `pages` directory, default in `app`.
-  swcMinify: true,
-  experimental: {
-    // Required:
-    appDir: true,
-  },
+    reactStrictMode: true,
+    swcMinify: true,
+    experimental: {
+        // Required:
+        appDir: true,
+    },
 };
-
-module.exports = nextConfig;
+exports.default = nextConfig;

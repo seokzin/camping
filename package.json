@@ -1,11 +1,12 @@
 {
   "private": true,
   "scripts": {
-    "dev": "start http://localhost:3000 && next dev --turbo",
-    "build": "next build",
+    "dev": "yarn config:next && start http://localhost:3000 && next dev --turbo",
+    "build": "yarn config:next && next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write \"**/*.{js,ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{js,ts,tsx,md}\"",
+    "config:next": "tsc next.config.ts --skipLibCheck --module commonjs --target esnext --esModuleInterop true --allowSyntheticDefaultImports true --moduleResolution node"
   },
   "prettier": {
     "arrowParens": "always",
