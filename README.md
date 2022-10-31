@@ -6,7 +6,8 @@
 
 ## 📚 Stacks
 
-- Next.js (TurboPack)
+- Next.js
+- yarn berry
 - TypeScript
 - Styled Components
 - State Management (Recoil, React Query)

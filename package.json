@@ -1,33 +1,25 @@
 {
+  "name": "camping",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "yarn config:next && start http://localhost:3000 && next dev --turbo",
-    "build": "yarn config:next && next build",
+    "dev": "next dev",
+    "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "format": "prettier --write \"**/*.{js,ts,tsx,md}\"",
-    "config:next": "tsc next.config.ts --skipLibCheck --module commonjs --target esnext --esModuleInterop true --allowSyntheticDefaultImports true --moduleResolution node"
-  },
-  "prettier": {
-    "arrowParens": "always",
-    "semi": true,
-    "trailingComma": "all",
-    "singleQuote": true
+    "lint": "next lint"
   },
   "dependencies": {
-    "next": "latest",
+    "next": "13.0.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "styled-components": "6.0.0-beta.2"
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "@types/node": "18.0.3",
-    "@types/react": "18.0.15",
-    "@types/react-dom": "18.0.6",
-    "autoprefixer": "^10.4.7",
-    "eslint": "8.19.0",
-    "eslint-config-next": "latest",
-    "prettier": "^2.7.1",
-    "typescript": "4.7.4"
-  }
+    "@types/node": "18.11.8",
+    "@types/react": "18.0.24",
+    "@types/react-dom": "18.0.8",
+    "eslint": "8.26.0",
+    "eslint-config-next": "13.0.0",
+    "typescript": "^4.8.4"
+  },
+  "packageManager": "yarn@3.2.4"
 }
