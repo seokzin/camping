@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "yarn config:next && yarn browser && next dev",
+    "build": "yarn config:next && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "config:next": "tsc next.config.ts --skipLibCheck --module commonjs --target esnext --esModuleInterop true --allowSyntheticDefaultImports true --moduleResolution node",
+    "browser": "start http://localhost:3000"
   },
   "dependencies": {
     "next": "13.0.0",
