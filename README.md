@@ -6,11 +6,11 @@
 
 ## 📚 Stacks
 
-- Next.js
+- Next.js 13
 - yarn berry
 - TypeScript
 - Styled Components
-- State Management (Recoil, React Query)
+- State Managements (Recoil, React Query)
 - Testing Libraries (Jest, React Testing Library)
 - Linters (ESLint, Prettier, Stylelint, Husky)
 
@@ -19,17 +19,14 @@
 ## 📂 Structures
 
 ```
-├── 📂 public                            // Static Files
-├── 📂 app                           // Root Components & Redux Store
-├── 📂 assets                        // CSV Files
-├── 📂 components                    // Components
-├── 📂 features                      // Redux Features
-├── 📂 hooks                         // Custom Hooks
-├── 📂 pages                         // Pages
-├── 📂 services                      // API Services
-├── 📂 styles                        // Global Styles
-├── 📂 utils                         // Utility Functions
-└── 📑 index.tsx                     // Entry Point
+├── 📂 public
+├── 📂 app
+├── 📂 components
+├── 📂 features
+├── 📂 hooks
+├── 📂 pages
+├── 📂 styles
+└── 📂 utils
 ```
 
 <br />

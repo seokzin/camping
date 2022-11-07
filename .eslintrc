@@ -8,8 +8,7 @@
     "prettier",
     "react",
     "react-hooks",
-    "simple-import-sort",
-    "functional"
+    "simple-import-sort"
   ],
   "env": {
     "browser": true,
@@ -22,10 +21,7 @@
     "prettier",
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:prettier/recommended",
-    "plugin:functional/external-recommended",
-    "plugin:functional/recommended",
-    "plugin:functional/stylistic"
+    "plugin:prettier/recommended"
   ],
   "rules": {
     "react/react-in-jsx-scope": "off",
