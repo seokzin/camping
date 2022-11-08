@@ -8,7 +8,7 @@
     "start": "next start",
     "config:next": "tsc next.config.ts --skipLibCheck --module commonjs --target esnext --esModuleInterop true --allowSyntheticDefaultImports true --moduleResolution node",
     "browser": "start http://localhost:3000",
-    "clear:all": "rm -rf yarn.lock .next .yarn/cache node_modules",
+    "clear:all": "rm -rf yarn.lock .next node_modules",
     "lint": "eslint --ext .ts,.tsx,.js,.jsx .",
     "lint:next": "next lint",
     "lint:css": "stylelint \"**/*.(ts|tsx|css)\"",
