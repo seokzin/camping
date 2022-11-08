@@ -1,4 +1,9 @@
+'use client'
+
 import React from 'react'
+import { ThemeProvider } from 'styled-components'
+
+import { GlobalStyle, theme } from '@/styles'
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -9,7 +14,18 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <meta name="description" content="Camping with Music" />
         <link rel="icon" href="/images/favicon.svg" type="image/svg+xml" />
       </head>
-      <body>{children}</body>
+
+      <body>
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+
+          <div>
+            <p>nav</p>
+
+            {children}
+          </div>
+        </ThemeProvider>
+      </body>
     </html>
   )
 }
