@@ -1,11 +1,18 @@
-import Image from 'next/image'
+'use client'
+
+import { ThemeProvider } from 'styled-components'
+
+import { GlobalStyle, theme } from '@/styles'
 
 const Home = () => {
   return (
-    <div>
-      <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-      bte
-    </div>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <div>
+        <p>home</p>
+        <p>test</p>
+      </div>
+    </ThemeProvider>
   )
 }
 
