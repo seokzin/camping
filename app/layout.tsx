@@ -2,6 +2,7 @@
 
 import { ThemeProvider } from 'styled-components'
 
+import Navbar from '@/components/Navbar'
 import { GlobalStyle, theme } from '@/styles'
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
@@ -25,7 +26,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           <GlobalStyle />
 
           <div>
-            <p>nav</p>
+            <Navbar />
 
             {children}
           </div>
