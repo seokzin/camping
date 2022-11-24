@@ -1,9 +1,17 @@
+'use client'
+
+import styled from 'styled-components'
+
 const Page = () => {
   return (
-    <div>
+    <Layout>
       <p>home</p>
-    </div>
+    </Layout>
   )
 }
 
 export default Page
+
+const Layout = styled.div`
+  background-color: #eeeeee;
+`
