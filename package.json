@@ -13,6 +13,7 @@
     "lint": "eslint --ext .ts,.tsx,.js,.jsx .",
     "lint:next": "next lint",
     "lint:css": "stylelint \"**/*.(ts|tsx|css)\"",
+    "format": "prettier \"**/*.(ts|tsx|js|jsx|json|css|md)\" --write",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:ci": "jest --ci",
