@@ -2,7 +2,7 @@
   "extends": [
     "stylelint-config-standard",
     "stylelint-config-prettier",
-    "stylelint-config-concentric-order"
+    "stylelint-config-recess-order"
   ],
   "customSyntax": "@stylelint/postcss-css-in-js",
   "plugins": ["stylelint-order"],
