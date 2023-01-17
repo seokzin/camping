@@ -3,15 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "yarn config:next && yarn browser && next dev --turbo",
+    "dev": "yarn config:next && next dev --turbo",
     "build": "yarn config:next && next build",
     "start": "next start",
     "config:next": "tsc next.config.ts --skipLibCheck --module commonjs --target esnext --esModuleInterop true --allowSyntheticDefaultImports true --moduleResolution node",
-    "browser": "start http://localhost:3000",
     "clean": "rm -rf yarn.lock .next node_modules",
     "reinstall": "yarn clean && yarn install",
     "lint": "eslint --ext .ts,.tsx,.js,.jsx .",
-    "lint:next": "next lint",
     "lint:css": "stylelint \"**/*.(ts|tsx|css)\"",
     "format": "prettier \"**/*.(ts|tsx|js|jsx|json|css|md)\" --write",
     "test": "jest",
@@ -19,11 +17,6 @@
     "test:ci": "jest --ci",
     "test:coverage": "jest --watchAll=false --coverage",
     "prepare": "husky install"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "lint-staged": {
     "*.{ts, tsx}": [
