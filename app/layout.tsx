@@ -1,29 +1,35 @@
 'use client'
 
+import localFont from 'next/font/local'
 import { ThemeProvider } from 'styled-components'
 
-import Navbar from '@/components/Navbar'
 import { GlobalStyle, theme } from '@/styles'
 
-import RootStyleLayout from './styleLayout'
+const pretendard = localFont({
+  src: '../public/fonts/PretendardVariable.woff2',
+})
+
+// const StyleLayout = ({ children }: { children: React.ReactNode }) => {
+//   const [StyledComponentsRegistry, styledComponentsFlushEffect] =
+//     useStyledComponentsRegistry()
+
+//   useServerInsertedHTML(() => <>{styledComponentsFlushEffect()}</>)
+
+//   return <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+// }
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <html lang="ko">
+    <html lang="ko" className={pretendard.className}>
       <head />
 
       <body>
-        <RootStyleLayout>
-          <ThemeProvider theme={theme}>
-            <GlobalStyle />
-
-            <div>
-              <Navbar />
-
-              {children}
-            </div>
-          </ThemeProvider>
-        </RootStyleLayout>
+        {/* <StyleLayout> */}
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          {children}
+        </ThemeProvider>
+        {/* </StyleLayout> */}
       </body>
     </html>
   )
