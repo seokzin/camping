@@ -3,10 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "yarn config:next && next dev --turbo",
-    "build": "yarn config:next && next build",
+    "dev": "next dev",
+    "build": "next build",
     "start": "next start",
-    "config:next": "tsc next.config.ts --skipLibCheck --module commonjs --target esnext --esModuleInterop true --allowSyntheticDefaultImports true --moduleResolution node",
     "clean": "rm -rf yarn.lock .next node_modules",
     "reinstall": "yarn clean && yarn install",
     "lint": "eslint --ext .ts,.tsx,.js,.jsx .",
@@ -16,6 +15,7 @@
     "test:watch": "jest --watch",
     "test:ci": "jest --ci",
     "test:coverage": "jest --watchAll=false --coverage",
+    "test:ui": "npx backstop test",
     "prepare": "husky install"
   },
   "lint-staged": {
@@ -29,9 +29,7 @@
     "axios": "^1.1.3",
     "next": "13.2.4",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "swr": "^2.1.0",
-    "ts-node": "^10.9.1"
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
     "@stylelint/postcss-css-in-js": "^0.38.0",
