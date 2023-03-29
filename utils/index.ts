@@ -1,3 +1,5 @@
+export { default as chunk, default as chunk } from './chunk'
 export { default as getPlayTime } from './getPlayTime'
 export { default as getTimeStamp } from './getTimeStamp'
+export { default as range } from './range'
 export { default as useCalendar } from './useCalendar'
