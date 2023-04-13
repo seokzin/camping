@@ -1,3 +1,3 @@
-const add = (a: number, b: number) => {
+const pluus = (a: number, b: number) => {
   a + b
 }
